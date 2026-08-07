@@ -296,4 +296,15 @@ footer {
     .subtitle { font-size: 1.2rem; }
     .project-card { padding: 2rem 1.5rem; }
     .cursor-glow { display: none; }
+    
+    /* Magija koja sprečava dugme da probije ekran na telefonima */
+    .btn {
+        font-size: 0.85rem; /* Blago smanjen font za telefone */
+        padding: 0.8rem 1rem;
+        white-space: normal; /* Dozvoljava tekstu da pređe u novi red */
+        word-break: break-all; /* Prisilno lomi dugačak link da ne ispadne iz okvira */
+        text-align: center;
+        justify-content: center;
+        line-height: 1.5; /* Daje malo prostora tekstu ako pređe u dva reda */
+    }
 }
