@@ -2,385 +2,73 @@
 <html lang="sr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Em Centar | Vrhunska Štampa & Marketing Kragujevac</title>
-    <meta name="description" content="Em Centar Kragujevac - Lider u ofset i digitalnoj štampi, štampi velikih formata, UV štampi, laserskom graviranju i reklamnom materijalu. Vaš marketing partner.">
-    <link rel="canonical" href="https://emcentar.com/wp/">
-    
-    <!-- Open Graph / SEO -->
-    <meta property="og:title" content="Em Centar | Premium Štampa & Marketing">
-    <meta property="og:description" content="Kvalitet koji pravi razliku. Veliki formati, UV štampa, ofset, laseri i brendiranje u Kragujevcu.">
-    <meta property="og:type" content="website">
-    
-    <!-- Fonts: Space Grotesk (Naslovi) + Plus Jakarta Sans (Tekst) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- AOS Animacije & Lucide Ikone -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srećko Prodanović - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Pozadinski efekti -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    
+    <!-- Custom kursor (svetlo koje prati miš) -->
+    <div class="cursor-glow"></div>
 
-    <!-- Scroll Progress Top Bar -->
-    <div class="scroll-progress-bar" id="scrollBar"></div>
+    <main class="container">
+        <section class="hero tilt-effect">
+            <div class="profile-wrapper">
+                <div class="profile-glow"></div>
+                <!-- Slika mora biti nazvana ja.png i nalaziti se u istom folderu -->
+                <img src="sl/ja.png" alt="Srećko Prodanović" class="profile-img">
+            </div>
+            
+            <h1 class="gradient-text">Srećko Prodanović</h1>
+            <p class="subtitle"><span id="typing-text"></span><span class="cursor">|</span></p>
+            
+            <div class="location">
+                <i class="fa-solid fa-location-dot"></i> Kragujevac, Srbija
+            </div>
+        </section>
 
-    <!-- Background Ambient Glow Effects -->
-    <div class="ambient-glow glow-1"></div>
-    <div class="ambient-glow glow-2"></div>
+        <section class="projects">
+            <div class="glass-card project-card tilt-effect">
+                <div class="card-content">
+                    <h2><i class="fa-solid fa-code"></i> Istaknuti Projekat</h2>
+                    <p>Izrada unikatnih i profesionalnih sajtova visokih performansi.</p>
+                    <a href="https://www.kodukletogholandjanina.com/" target="_blank" class="btn">
+                        kodukletogholandjanina.com <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
 
-    <!-- Desktop Floating Glass Header -->
-    <header id="desktop-header">
-        <div class="header-container">
-            <a href="#" class="logo" aria-label="Em Centar Početna">
-                <span class="logo-text">Em<span class="gold-accent">Centar</span></span>
-                <span class="logo-sub">PRINT & MARKETING</span>
+        <section class="contact">
+            <a href="tel:0612006959" class="glass-card contact-card tilt-effect">
+                <div class="icon-box"><i class="fa-solid fa-phone"></i></div>
+                <h3>Telefon</h3>
+                <p>061 200 6959</p>
             </a>
             
-            <!-- Desktop Navigacija -->
-            <nav class="desktop-nav">
-                <ul>
-                    <li><a href="#home" class="nav-link active">Početna</a></li>
-                    <li><a href="#usluge" class="nav-link">Usluge</a></li>
-                    <li><a href="#o-nama" class="nav-link">O Nama</a></li>
-                    <li><a href="#kalkulator" class="nav-link">Brzi Upit</a></li>
-                    <li><a href="#kontakt" class="nav-link">Kontakt</a></li>
-                </ul>
-            </nav>
-
-            <a href="tel:+381637623555" class="btn btn-nav ripple">
-                <i data-lucide="phone-call"></i>
-                <span> Pozovi Odmah</span>
+            <a href="mailto:Prodanovicsrecko19@gmail.com" class="glass-card contact-card tilt-effect">
+                <div class="icon-box"><i class="fa-solid fa-envelope"></i></div>
+                <h3>E-mail</h3>
+                <p>Prodanovicsrecko19@gmail.com</p>
             </a>
-        </div>
-    </header>
 
-    <main>
-        <!-- HERO SEKCIJA -->
-        <section id="home" class="hero">
-            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-                <div class="badge-pill">
-                    <span class="badge-dot"></span> Kragujevac & Cela Srbija
-                </div>
-                <h1>Bitno je da vas <br><span class="text-glow">primećuju i pamte!</span></h1>
-                <p class="hero-description">
-                    Spajamo vrhunsku tehnologiju štampe, inovativan dizajn i kreativna marketing rešenja. Pretvaramo vaše ideje u opipljiv uspeh.
-                </p>
-                <div class="hero-actions">
-                    <a href="#kontakt" class="btn btn-primary ripple">
-                        <i data-lucide="send"></i> Zatražite Ponudu
-                    </a>
-                    <a href="#usluge" class="btn btn-glass ripple">
-                        <i data-lucide="grid"></i> Istražite Usluge
-                    </a>
-                </div>
-
-                <!-- Stats counter -->
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="stat-num" data-count="15">15+</span>
-                        <span class="stat-label">Godina Iskustva</span>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <span class="stat-num" data-count="1000">10k+</span>
-                        <span class="stat-label">Završenih Projekata</span>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <span class="stat-num">100%</span>
-                        <span class="stat-label">Posvećenost Kvalitetu</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- NASE USLUGE SEKCIJA -->
-        <section id="usluge" class="services-section">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-subtitle">PROIZVODNJA & DIZAJN</span>
-                <h2>Naše Ekspertske Usluge</h2>
-                <p>Od vizitkarte do bilborda – sve na jednom mestu sa najsavremenijom opremom.</p>
-            </div>
-
-            <div class="cards-grid">
-                <article class="glass-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card-icon"><i data-lucide="maximize-2"></i></div>
-                    <h3>Veliki Formati & Autografika</h3>
-                    <p>Brendiranje vozila (autografika), izrada cerada, bilborda, svetlećih reklama, izloga i samolepljivih folija vrhunske postojanosti.</p>
-                    <ul class="card-list">
-                        <li><i data-lucide="check"></i> Brendiranje izloga i vozila</li>
-                        <li><i data-lucide="check"></i> Cerade & Baneri velikih dimenzija</li>
-                        <li><i data-lucide="check"></i> Roll-up i promo displeji</li>
-                    </ul>
-                </article>
-
-                <article class="glass-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card-icon"><i data-lucide="printer"></i></div>
-                    <h3>Ofset & Digitalna Štampa</h3>
-                    <p>Brza i besprekorna štampa kataloga, vizitkarti, flajera, brošura, plakata, memoranduma i bloko robe u svim tiražima.</p>
-                    <ul class="card-list">
-                        <li><i data-lucide="check"></i> Vizitkarte sa specijalnim efektima</li>
-                        <li><i data-lucide="check"></i> Katalozi i brošure visoke rezolucije</li>
-                        <li><i data-lucide="check"></i> Plakati, leci i flajeri</li>
-                    </ul>
-                </article>
-
-                <article class="glass-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card-icon"><i data-lucide="sun"></i></div>
-                    <h3>UV Štampa na Materijalima</h3>
-                    <p>Direktna fotorealistična štampa na drvetu, staklu, plastici, koži, metalu i reklamnim proizvodima uz UV lakiranje.</p>
-                    <ul class="card-list">
-                        <li><i data-lucide="check"></i> Štampa na drvetu, pleksiglasu, staklu</li>
-                        <li><i data-lucide="check"></i> Upaljači, olovke, rokovnici</li>
-                        <li><i data-lucide="check"></i> Unikatni poslovni pokloni</li>
-                    </ul>
-                </article>
-
-                <article class="glass-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card-icon"><i data-lucide="sparkles"></i></div>
-                    <h3>Lasersko Sečenje & Graviranje</h3>
-                    <p>Precizno graviranje i sečenje pleksiglasa, drveta, šperploče i metala za unikatne natpise, nagrade i reklame.</p>
-                    <ul class="card-list">
-                        <li><i data-lucide="check"></i> 3D slova i natpisi za lokale</li>
-                        <li><i data-lucide="check"></i> Gravirane plakete i zahvalnice</li>
-                        <li><i data-lucide="check"></i> Sečenje po meri i obliku</li>
-                    </ul>
-                </article>
-
-                <article class="glass-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card-icon"><i data-lucide="pen-tool"></i></div>
-                    <h3>Grafički Dizajn & Priprema</h3>
-                    <p>Izrada vizuelnog identiteta, logotipa, brend knjige i kompletna profesionalna grafička priprema za sve vrste štampe.</p>
-                    <ul class="card-list">
-                        <li><i data-lucide="check"></i> Dizajn logotipa i brendinga</li>
-                        <li><i data-lucide="check"></i> Vektorizacija i priprema za štampu</li>
-                        <li><i data-lucide="check"></i> Kreativna marketing rešenja</li>
-                    </ul>
-                </article>
-
-                <article class="glass-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card-icon"><i data-lucide="gift"></i></div>
-                    <h3>Reklamni Materijal & Tekstil</h3>
-                    <p>Brendirane majice, duksevi, kačketi, šolje, privesci, kalendari i kompletan promo materijal za vašu firmu.</p>
-                    <ul class="card-list">
-                        <li><i data-lucide="check"></i> Vez i štampa na tekstilu</li>
-                        <li><i data-lucide="check"></i> Reklamne šolje, satovi i privesci</li>
-                        <li><i data-lucide="check"></i> Poslovni setovi i kalendari</li>
-                    </ul>
-                </article>
-            </div>
-        </section>
-
-        <!-- O NAMA SEKCIJA -->
-        <section id="o-nama" class="about-section">
-            <div class="about-container" data-aos="fade-up">
-                <div class="about-text">
-                    <span class="section-subtitle">O EM CENTRU</span>
-                    <h2>Kamen Temeljac Vašeg Uspešnog Marketinga</h2>
-                    <p>Smešteni u Kragujevcu, sa dugogodišnjim iskustvom, Em Centar predstavlja sinonim za pouzdanost, vrhunski kvalitet i brzinu u svetu štampe i reklama.</p>
-                    <p>Bilo da vam je potrebna brending kampanja velikih razmera ili sofisticirani posvetni poslovni pokloni, naš tim garantuje vrhunsku izradu i poštovanje rokova.</p>
-                    
-                    <div class="about-features">
-                        <div class="feature-item">
-                            <i data-lucide="zap" class="gold-icon"></i>
-                            <div>
-                                <h4>Brza Izrada</h4>
-                                <p>Poštujemo vaše rokove bez kompromisa u kvalitetu.</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <i data-lucide="shield-check" class="gold-icon"></i>
-                            <div>
-                                <h4>Vrhunski Materijali</h4>
-                                <p>Koristimo najkvalitetnije boje i podloge za trajne rezultate.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-visual">
-                    <div class="visual-card">
-                        <div class="badge-experience">
-                            <span>100%</span>
-                            <small>Zadovoljni Klijenti</small>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=800&auto=format&fit=crop" alt="Em Centar Proizvodnja Kragujevac" class="about-img">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- BRZI UPIT / KALKULATOR -->
-        <section id="kalkulator" class="interactive-quote">
-            <div class="quote-container" data-aos="fade-up">
-                <div class="section-header">
-                    <span class="section-subtitle">BRZI PROCES</span>
-                    <h2>Zatražite Procenu u 3 Klika</h2>
-                    <p>Izaberite kategoriju i pošaljite nam detalje za trenutnu procenu cene.</p>
-                </div>
-                
-                <div class="service-selector">
-                    <button class="selector-btn active" data-type="Veliki Formati"><i data-lucide="maximize-2"></i> Veliki Formati</button>
-                    <button class="selector-btn" data-type="Ofset / Digitalna"><i data-lucide="printer"></i> Ofset & Digitalna</button>
-                    <button class="selector-btn" data-type="UV / Laser"><i data-lucide="sun"></i> UV Štampa & Laser</button>
-                    <button class="selector-btn" data-type="Promo Materijal"><i data-lucide="gift"></i> Reklamni Materijal</button>
-                </div>
-
-                <div class="quick-form-wrapper">
-                    <form id="quickQuoteForm" class="glass-form">
-                        <input type="hidden" id="selectedServiceInput" name="Izabrana Usluga" value="Veliki Formati">
-                        <input type="hidden" name="_subject" value="Novi Brzi Upit sa Sajta!">
-                        <input type="hidden" name="_captcha" value="false">
-
-                        <div class="form-row">
-                            <input type="text" id="qName" name="Ime / Firma" required placeholder="Vaše Ime / Naziv Firme">
-                            <input type="tel" id="qPhone" name="Broj Telefona" required placeholder="Broj Telefona">
-                        </div>
-                        <div class="form-row">
-                            <input type="email" id="qEmail" name="Email Adresa" required placeholder="Vaša Email Adresa">
-                            <input type="text" id="qAmount" name="Kolicina / Dimenzije" placeholder="Okvirna Količina / Dimenzije">
-                        </div>
-                        <textarea id="qDetails" name="Opis Projekta" rows="3" placeholder="Opišite ukratko vaš projekat (npr. dimenzije, rok, materijal)..."></textarea>
-                        
-                        <button type="submit" class="btn btn-primary ripple w-100">
-                            <i data-lucide="send"></i> Pošalji Upit Odmah
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <!-- KONTAKT SEKCIJA -->
-        <section id="kontakt" class="contact-section">
-            <div class="contact-container" data-aos="fade-up">
-                <div class="contact-info-card">
-                    <span class="section-subtitle">BUDIMO U KONTAKTU</span>
-                    <h2>Posetite nas ili nas Pozovite</h2>
-                    <p>Naš tim vam stoji na raspolaganju za sve konsultacije i savete u vezi štampe.</p>
-
-                    <div class="contact-methods">
-                        <a href="tel:+381637623555" class="method-item">
-                            <div class="method-icon"><i data-lucide="phone"></i></div>
-                            <div>
-                                <small>Telefon 1</small>
-                                <strong>+381 63 76 23 555</strong>
-                            </div>
-                        </a>
-                        <a href="tel:+381607623555" class="method-item">
-                            <div class="method-icon"><i data-lucide="smartphone"></i></div>
-                            <div>
-                                <small>Telefon 2 / Viber</small>
-                                <strong>+381 60 76 23 555</strong>
-                            </div>
-                        </a>
-                        <a href="mailto:emcentar@yahoo.com" class="method-item">
-                            <div class="method-icon"><i data-lucide="mail"></i></div>
-                            <div>
-                                <small>Email Adresa</small>
-                                <strong>emcentar@yahoo.com</strong>
-                            </div>
-                        </a>
-                        <a href="https://maps.app.goo.gl/DBxczY3pxojnEDm86" target="_blank" rel="noopener noreferrer" class="method-item">
-                            <div class="method-icon"><i data-lucide="map-pin"></i></div>
-                            <div>
-                                <small>Lokacija</small>
-                                <strong>Veljka Rebića 29, 34000 Kragujevac</strong>
-                            </div>
-                        </a>
-                        
-                        <a href="https://maps.app.goo.gl/DBxczY3pxojnEDm86" target="_blank" rel="noopener noreferrer" class="btn btn-glass ripple w-100" style="margin-top: 5px; border: 1px solid var(--gold-primary); color: var(--gold-primary);">
-                            <i data-lucide="map-pinned"></i> Otvori Google Mapu
-                        </a>
-                    </div>
-                </div>
-
-                <div class="contact-form-card">
-                    <form class="glass-form" id="contactForm">
-                        <h3>Direktna Poruka</h3>
-                        <input type="hidden" name="_subject" value="Nova Poruka sa Kontakt Forme!">
-                        <input type="hidden" name="_captcha" value="false">
-
-                        <div class="input-group">
-                            <input type="text" id="name" name="Ime i Prezime" required placeholder="Vaše Ime i Prezime">
-                        </div>
-                        <div class="input-group">
-                            <input type="email" id="email" name="Email Adresa" required placeholder="Vaša Email Adresa">
-                        </div>
-                        <div class="input-group">
-                            <textarea id="message" name="Poruka" rows="4" required placeholder="Kako vam možemo pomoći?"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary ripple w-100">
-                            Pošalji Poruku
-                        </button>
-                    </form>
-                </div>
-            </div>
+            <a href="https://www.instagram.com/_srecko_2007_/" target="_blank" class="glass-card contact-card tilt-effect">
+                <div class="icon-box instagram"><i class="fa-brands fa-instagram"></i></div>
+                <h3>Instagram</h3>
+                <p>@_srecko_2007_</p>
+            </a>
         </section>
     </main>
-
-    <!-- FOOTER -->
+    
     <footer>
-        <div class="footer-container">
-            <div class="footer-brand">
-                <a href="#" class="logo">Em<span class="gold-accent">Centar</span></a>
-                <p>Lider u sferi ofset i digitalne štampe, brendiranja i reklamnog materijala u Kragujevcu.</p>
-            </div>
-            <div class="footer-links">
-                <h4>Brzi Linkovi</h4>
-                <a href="#home">Početna</a>
-                <a href="#usluge">Sve Usluge</a>
-                <a href="#o-nama">O Nama</a>
-                <a href="#kalkulator">Brzi Upit</a>
-            </div>
-            <div class="footer-socials">
-                <h4>Pratite Nas</h4>
-                <div class="social-icons">
-                    <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
-                    <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
-                    <a href="#" aria-label="YouTube"><i data-lucide="youtube"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Em Centar Kragujevac. Sva prava zadržana.</p>
-        </div>
+        <p>&copy; 2026 Srećko Prodanović. Sva prava zadržana.</p>
     </footer>
 
-    <!-- MOBILE FLOATING APP DOCK -->
-    <nav class="mobile-app-dock" aria-label="Mobilna Navigacija">
-        <a href="#home" class="dock-item active">
-            <i data-lucide="home"></i>
-            <span>Početna</span>
-        </a>
-        <a href="#usluge" class="dock-item">
-            <i data-lucide="grid"></i>
-            <span>Usluge</span>
-        </a>
-        <a href="#kalkulator" class="dock-item">
-            <i data-lucide="calculator"></i>
-            <span>Upit</span>
-        </a>
-        <a href="#kontakt" class="dock-item">
-            <i data-lucide="map-pin"></i>
-            <span>Kontakt</span>
-        </a>
-        <a href="tel:+381637623555" class="dock-item dock-call">
-            <i data-lucide="phone-call"></i>
-            <span>Poziv</span>
-        </a>
-    </nav>
-
-    <!-- Toast Notification -->
-    <div id="toast" class="toast">
-        <i data-lucide="check-circle"></i>
-        <span>Poruka uspešno poslata! Javićemo vam se ubrzo.</span>
-    </div>
-
-    <!-- Skripte -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
