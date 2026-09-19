@@ -181,7 +181,7 @@
         /* --- Masivna Profilna Slika --- */
         .profile-img-container {
             position: relative;
-            width: 150px; height: 150px; /* Smanjeno za savršen prikaz na manjim telefonima */
+            width: 150px; height: 150px; 
             margin: 0 auto 1.5rem auto;
             border-radius: 50%;
             z-index: 10;
@@ -333,7 +333,6 @@
     <!-- Modal za Kontakt -->
     <div id="contact-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300">
         <div class="tilt-card p-6 md:p-12 w-[92%] max-w-lg relative flex flex-col gap-4 md:gap-6 transform scale-95 transition-transform duration-300 border border-cyan-500/30" id="modal-content">
-            <!-- X Dugme za zatvaranje -->
             <button id="close-modal" class="absolute top-3 right-4 md:top-4 md:right-5 text-gray-400 hover:text-cyan-400 text-3xl z-10 transition-colors">
                 <i class="fa-solid fa-xmark"></i>
             </button>
@@ -380,7 +379,7 @@
         <div class="orb orb-2"></div>
     </div>
 
-    <!-- OPTIMIZOVANA NAVIGACIJA ZA SVE UREĐAJE -->
+    <!-- Navigacija -->
     <nav class="fixed top-0 w-full px-4 py-3 md:p-6 z-50 flex flex-col md:flex-row justify-center md:justify-between items-center bg-black/50 backdrop-blur-md border-b border-white/5 transition-all duration-300 gap-2 md:gap-0 shadow-lg shadow-cyan-500/5">
         <div class="sci-fi-text text-xl md:text-2xl font-bold tracking-widest text-glow-cyan w-full md:w-auto text-center md:text-left">S.P</div>
         <div class="flex gap-4 sm:gap-6 md:gap-8 font-bold tracking-widest text-[10px] sm:text-sm md:text-base uppercase items-center justify-center flex-wrap w-full md:w-auto">
@@ -391,7 +390,7 @@
         </div>
     </nav>
 
-    <!-- Hero Sekcija -->
+    <!-- Hero Sekcija (UNAPRIJEĐEN TEKST) -->
     <header id="home" class="min-h-screen flex flex-col justify-center items-center relative px-4 text-center pt-32 overflow-hidden w-full">
         
         <div class="profile-img-container reveal-up" style="transition-delay: 200ms;">
@@ -399,25 +398,23 @@
         </div>
 
         <p class="text-cyan-400 font-bold tracking-[0.4em] mb-4 sm:mb-6 uppercase reveal-up text-[10px] md:text-sm" style="transition-delay: 400ms;">
-            <i class="fa-solid fa-bolt mr-2 text-yellow-400"></i> Sistem Aktiviran
+            <i class="fa-solid fa-bolt mr-2 text-yellow-400"></i> Digitalni Inženjering
         </p>
         
-        <!-- FIX ZA PREVELIK TEKST: Korišćenje vw (viewport width) i maksimalne širine -->
         <div class="w-full px-2 max-w-[100vw] reveal-up" style="transition-delay: 600ms;">
             <h1 class="typing-container text-[6.5vw] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-2 sm:mb-4 text-glow-purple">
                 SREĆKO PRODANOVIĆ
             </h1>
         </div>
         
-        <!-- Prilagođen podnaslov -->
         <h2 class="text-[3.5vw] sm:text-xl md:text-3xl lg:text-4xl text-gray-300 font-light reveal-up mt-4 sm:mt-6 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 w-full" style="transition-delay: 800ms;">
             <span class="text-cyan-400 font-['Orbitron'] tracking-widest">WEB DEVELOPER</span> 
             <span class="hidden sm:block w-1.5 h-1.5 bg-purple-500 rounded-full mx-2"></span>
             <span class="mt-2 sm:mt-0 whitespace-nowrap"><i class="fa-solid fa-location-dot text-purple-400 mr-1 sm:mr-2"></i> Kragujevac</span>
         </h2>
         
-        <p class="mt-6 sm:mt-8 max-w-2xl text-gray-400 text-sm sm:text-base md:text-xl reveal-up leading-relaxed px-4" style="transition-delay: 1000ms;">
-            Kreativni arhitekta digitalnih iskustava. Specijalizovan za izradu interaktivnih, ekstremno brzih i vizuelno dominantnih web aplikacija koje ostavljaju utisak.
+        <p class="mt-6 sm:mt-8 max-w-3xl text-gray-400 text-sm sm:text-base md:text-xl reveal-up leading-relaxed px-4 font-light" style="transition-delay: 1000ms;">
+            Kreativni arhitekta digitalnih iskustava. Specijalizovan za izradu ekstremno brzih, vizuelno dominantnih web platformi koje <span class="text-white font-bold">direktno povećavaju konverziju klijenata i grade prestiž tvog brenda.</span>
         </p>
 
         <a href="#services" class="mt-12 sm:mt-16 text-cyan-400 text-3xl sm:text-4xl animate-bounce reveal-up cursor-pointer inline-block hover:text-purple-400 transition-colors" style="transition-delay: 1200ms;">
@@ -425,48 +422,55 @@
         </a>
     </header>
 
-    <!-- Ekspertiza Sekcija -->
+    <!-- Ekspertiza Sekcija (POTPUNO REKONSTRUISANA) -->
     <section id="services" class="min-h-screen py-24 sm:py-32 px-4 sm:px-8 lg:px-16 flex flex-col justify-center relative z-10 w-full">
         <div class="text-center mb-16 sm:mb-20 reveal-up">
             <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-glow-cyan mb-4 uppercase tracking-wider">Moja Ekspertiza</h2>
             <div class="h-1 w-24 sm:w-32 bg-gradient-to-r from-cyan-400 via-purple-500 to-transparent mx-auto rounded-full"></div>
-            <p class="mt-6 text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">Šta tačno radim i kako mogu unaprijediti tvoje poslovanje.</p>
+            <p class="mt-6 text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">Zašto vrhunski biznisi biraju moja rješenja za svoj digitalni rast.</p>
         </div>
 
-        <div class="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             
+            <!-- Kartica 1: Fokus na brzinu (Ključno za hranu i konverziju) -->
             <div class="tilt-card p-8 sm:p-10 flex flex-col h-full reveal-left">
                 <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6 border border-cyan-500/30">
-                    <i class="fa-solid fa-code text-2xl sm:text-3xl text-cyan-400"></i>
+                    <i class="fa-solid fa-rocket text-2xl sm:text-3xl text-cyan-400"></i>
                 </div>
                 <div class="card-content">
-                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-4 font-['Orbitron']">Front-End Dev</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm sm:text-base mb-6">Kreiram arhitekturu vizuelno impresivnih web platformi. Koristim najmodernije tehnologije kako bi tvoj sajt bio brz, stabilan i siguran.</p>
+                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-4 font-['Orbitron']">Eksplozivne Performanse</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm sm:text-base mb-6">U digitalnom svijetu, spora učitavanja odbijaju kupce. Projektujem napredne, lagane sisteme (HTML5, JS ES6) koji garantuju instant odziv platforme i zadržavaju pažnju posjetilaca.</p>
                     <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="px-3 py-1 text-xs font-bold bg-white/5 rounded border border-white/10 text-gray-300">HTML5</span>
-                        <span class="px-3 py-1 text-xs font-bold bg-white/5 rounded border border-white/10 text-gray-300">CSS3</span>
-                        <span class="px-3 py-1 text-xs font-bold bg-white/5 rounded border border-white/10 text-gray-300">JavaScript ES6</span>
+                        <span class="px-3 py-1 text-xs font-bold bg-white/5 rounded border border-white/10 text-cyan-300">Fast-Load</span>
+                        <span class="px-3 py-1 text-xs font-bold bg-white/5 rounded border border-white/10 text-purple-300">High-ROI</span>
                     </div>
                 </div>
             </div>
 
+            <!-- Kartica 2: Fokus na UX (Ključno za sve biznise) -->
             <div class="tilt-card p-8 sm:p-10 flex flex-col h-full reveal-up" style="transition-delay: 200ms;">
                 <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-purple-500/10 flex items-center justify-center mb-6 border border-purple-500/30">
-                    <i class="fa-solid fa-mobile-screen-button text-2xl sm:text-3xl text-purple-400"></i>
+                    <i class="fa-solid fa-crosshairs text-2xl sm:text-3xl text-purple-400"></i>
                 </div>
                 <div class="card-content">
-                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-4 font-['Orbitron']">Mobile-First Dizajn</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm sm:text-base">Većina pregleda danas dolazi sa telefona. Moji sajtovi su 100% responzivni, što znači da izgledaju i rade besprijekorno na apsolutno svakom ekranu i uređaju.</p>
+                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-4 font-['Orbitron']">Optimizacija Konverzije</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm sm:text-base">Preko 85% prometa danas dolazi sa telefona. Moji dizajni nisu samo vizuelno spektakularni, već su psihološki strukturirani tako da posjetioca neosjetno pretvore u tvog novog kupca ili klijenta.</p>
                 </div>
             </div>
 
+            <!-- Kartica 3: Fokus na ciljane niše (Premium i Hrana) -->
             <div class="tilt-card p-8 sm:p-10 flex flex-col h-full reveal-right" style="transition-delay: 400ms;">
                 <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-pink-500/10 flex items-center justify-center mb-6 border border-pink-500/30">
-                    <i class="fa-solid fa-store text-2xl sm:text-3xl text-pink-400"></i>
+                    <i class="fa-solid fa-gem text-2xl sm:text-3xl text-pink-400"></i>
                 </div>
                 <div class="card-content">
-                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-4 font-['Orbitron']">Ciljani Biznisi</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm sm:text-base">Pomažem lokalnim preduzetnicima da izgrade dominantno digitalno prisustvo. Najčešće kreiram moderna rješenja i platforme za <span class="text-white font-bold">restorane brze hrane, burger barove, i izdavanje luksuznih vikendica</span>.</p>
+                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-4 font-['Orbitron']">Premium Rješenja</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm sm:text-base mb-4">
+                        Ne pravim obične sajtove, već gradim digitalni prestiž i automatizovane sisteme za biznise koji žele da dominiraju.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed text-sm sm:text-base">
+                        Kreiram elitne prezentacije za <span class="text-white font-bold">advokatske kancelarije, luksuzne vikendice i sale za proslave</span>, kao i brze sisteme prodaje za moderne <span class="text-white font-bold">restorane i burger barove</span>.
+                    </p>
                 </div>
             </div>
 
@@ -539,7 +543,6 @@
     </footer>
 
     <script>
-        // --- 1. Napredna WOW Loader Logika ---
         const loader = document.getElementById('loader');
         const terminal = document.getElementById('loader-terminal');
         
@@ -579,13 +582,11 @@
 
         document.body.style.overflowY = 'hidden';
 
-        // --- 2. MODAL LOGIKA ZA KONTAKT ---
         const contactModal = document.getElementById('contact-modal');
         const modalContent = document.getElementById('modal-content');
         const openModalBtns = document.querySelectorAll('.open-modal-btn');
         const closeModalBtn = document.getElementById('close-modal');
 
-        // Funkcija za otvaranje
         openModalBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -600,7 +601,6 @@
             });
         });
 
-        // Funkcija za zatvaranje
         const closeModal = () => {
             contactModal.classList.add('opacity-0');
             modalContent.classList.remove('scale-100');
@@ -619,7 +619,6 @@
             }
         });
 
-        // --- 3. Custom Kursor logika ---
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorOutline = document.querySelector('.cursor-outline');
         
@@ -654,7 +653,6 @@
             });
         }
 
-        // --- 4. Vanila JS 3D Tilt Efekat za kartice ---
         const tiltCards = document.querySelectorAll('.tilt-card');
         
         if(window.matchMedia("(pointer: fine)").matches) {
@@ -679,7 +677,6 @@
             });
         }
 
-        // --- 5. Intersection Observer za moderne Scroll animacije ---
         const observerOptions = {
             root: null,
             rootMargin: '0px',
