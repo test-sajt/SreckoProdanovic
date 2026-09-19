@@ -180,17 +180,21 @@
         /* --- Masivna Profilna Slika --- */
         .profile-img-container {
             position: relative;
-            width: 220px; height: 220px; 
-            margin: 0 auto 3rem auto;
+            width: 180px; height: 180px;  /* Smanjeno za telefone */
+            margin: 0 auto 2rem auto;
             border-radius: 50%;
             z-index: 10;
             display: flex;
             justify-content: center;
             align-items: center;
         }
+        @media (min-width: 480px) {
+            .profile-img-container { width: 220px; height: 220px; margin-bottom: 3rem; }
+        }
         @media (min-width: 768px) {
             .profile-img-container { width: 320px; height: 320px; }
         }
+        
         .profile-img-container::before {
             content: '';
             position: absolute;
@@ -371,7 +375,7 @@
         <div class="orb orb-2"></div>
     </div>
 
-    <!-- PRILAGOĐENA NAVIGACIJA ZA SVE UREĐAJE (U JEDNOM REDU) -->
+    <!-- PRILAGOĐENA NAVIGACIJA ZA SVE UREĐAJE -->
     <nav class="fixed top-0 w-full px-3 py-4 md:p-6 z-50 flex justify-between items-center bg-black/30 backdrop-blur-md border-b border-white/5 transition-all duration-300">
         <div class="sci-fi-text text-base min-[380px]:text-lg md:text-2xl font-bold tracking-widest text-glow-cyan">SP_</div>
         <div class="flex gap-[6px] min-[380px]:gap-3 sm:gap-6 md:gap-8 font-bold tracking-widest text-[9px] min-[380px]:text-[10px] sm:text-sm md:text-base uppercase items-center whitespace-nowrap">
@@ -389,48 +393,50 @@
             <img src="sl/ja.png" alt="Srećko Prodanović" class="profile-img">
         </div>
 
-        <p class="text-cyan-400 font-bold tracking-[0.4em] mb-6 uppercase reveal-up text-xs md:text-sm" style="transition-delay: 400ms;">
+        <p class="text-cyan-400 font-bold tracking-[0.4em] mb-4 sm:mb-6 uppercase reveal-up text-[10px] md:text-sm" style="transition-delay: 400ms;">
             <i class="fa-solid fa-bolt mr-2 text-yellow-400"></i> Sistem Aktiviran
         </p>
         
+        <!-- Prilagođen font naslova za mobilne -->
         <div class="inline-block max-w-full reveal-up" style="transition-delay: 600ms;">
-            <h1 class="typing-container text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-4 text-glow-purple mx-auto">
+            <h1 class="typing-container text-[1.4rem] min-[380px]:text-[1.7rem] sm:text-5xl md:text-6xl lg:text-8xl font-black mb-2 sm:mb-4 text-glow-purple mx-auto">
                 SREĆKO PRODANOVIĆ
             </h1>
         </div>
         
-        <h2 class="text-xl md:text-3xl lg:text-4xl text-gray-300 font-light reveal-up mt-6 flex items-center justify-center gap-3" style="transition-delay: 800ms;">
+        <!-- Prilagođen podnaslov (složen u kolonu na telefonima) -->
+        <h2 class="text-sm min-[380px]:text-base sm:text-xl md:text-3xl lg:text-4xl text-gray-300 font-light reveal-up mt-4 sm:mt-6 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3" style="transition-delay: 800ms;">
             <span class="text-cyan-400 font-['Orbitron'] tracking-widest">WEB DEVELOPER</span> 
-            <span class="w-1.5 h-1.5 bg-purple-500 rounded-full mx-2"></span>
-            <span><i class="fa-solid fa-location-dot text-purple-400 mr-2"></i> Kragujevac</span>
+            <span class="hidden sm:block w-1.5 h-1.5 bg-purple-500 rounded-full mx-2"></span>
+            <span class="mt-2 sm:mt-0"><i class="fa-solid fa-location-dot text-purple-400 mr-1 sm:mr-2"></i> Kragujevac</span>
         </h2>
         
-        <p class="mt-8 max-w-2xl text-gray-400 text-base md:text-xl reveal-up leading-relaxed" style="transition-delay: 1000ms;">
+        <p class="mt-6 sm:mt-8 max-w-2xl text-gray-400 text-sm sm:text-base md:text-xl reveal-up leading-relaxed" style="transition-delay: 1000ms;">
             Kreativni arhitekta digitalnih iskustava. Specijalizovan za izradu interaktivnih, ekstremno brzih i vizuelno dominantnih web aplikacija koje ostavljaju utisak.
         </p>
 
-        <a href="#services" class="mt-16 text-cyan-400 text-4xl animate-bounce reveal-up cursor-pointer inline-block hover:text-purple-400 transition-colors" style="transition-delay: 1200ms;">
+        <a href="#services" class="mt-12 sm:mt-16 text-cyan-400 text-3xl sm:text-4xl animate-bounce reveal-up cursor-pointer inline-block hover:text-purple-400 transition-colors" style="transition-delay: 1200ms;">
             <i class="fa-solid fa-angles-down text-glow-cyan"></i>
         </a>
     </header>
 
     <!-- NOVA SEKCIJA -->
-    <section id="services" class="min-h-screen py-32 px-4 sm:px-8 lg:px-16 flex flex-col justify-center relative z-10">
-        <div class="text-center mb-20 reveal-up">
-            <h2 class="text-5xl md:text-6xl font-black text-glow-cyan mb-4 uppercase tracking-wider">Moja Ekspertiza</h2>
-            <div class="h-1 w-32 bg-gradient-to-r from-cyan-400 via-purple-500 to-transparent mx-auto rounded-full"></div>
-            <p class="mt-6 text-gray-400 text-lg max-w-2xl mx-auto">Šta tačno radim i kako mogu unaprijediti tvoje poslovanje.</p>
+    <section id="services" class="min-h-screen py-24 sm:py-32 px-4 sm:px-8 lg:px-16 flex flex-col justify-center relative z-10">
+        <div class="text-center mb-16 sm:mb-20 reveal-up">
+            <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-glow-cyan mb-4 uppercase tracking-wider">Moja Ekspertiza</h2>
+            <div class="h-1 w-24 sm:w-32 bg-gradient-to-r from-cyan-400 via-purple-500 to-transparent mx-auto rounded-full"></div>
+            <p class="mt-6 text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">Šta tačno radim i kako mogu unaprijediti tvoje poslovanje.</p>
         </div>
 
-        <div class="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             
-            <div class="tilt-card p-10 flex flex-col h-full reveal-left">
-                <div class="w-16 h-16 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6 border border-cyan-500/30">
-                    <i class="fa-solid fa-code text-3xl text-cyan-400"></i>
+            <div class="tilt-card p-8 sm:p-10 flex flex-col h-full reveal-left">
+                <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6 border border-cyan-500/30">
+                    <i class="fa-solid fa-code text-2xl sm:text-3xl text-cyan-400"></i>
                 </div>
                 <div class="card-content">
-                    <h3 class="text-2xl font-bold text-white mb-4 font-['Orbitron']">Front-End Dev</h3>
-                    <p class="text-gray-400 leading-relaxed text-base mb-6">Kreiram arhitekturu vizuelno impresivnih web platformi. Koristim najmodernije tehnologije kako bi tvoj sajt bio brz, stabilan i siguran.</p>
+                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-4 font-['Orbitron']">Front-End Dev</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm sm:text-base mb-6">Kreiram arhitekturu vizuelno impresivnih web platformi. Koristim najmodernije tehnologije kako bi tvoj sajt bio brz, stabilan i siguran.</p>
                     <div class="flex flex-wrap gap-2 mt-auto">
                         <span class="px-3 py-1 text-xs font-bold bg-white/5 rounded border border-white/10 text-gray-300">HTML5</span>
                         <span class="px-3 py-1 text-xs font-bold bg-white/5 rounded border border-white/10 text-gray-300">CSS3</span>
@@ -439,23 +445,23 @@
                 </div>
             </div>
 
-            <div class="tilt-card p-10 flex flex-col h-full reveal-up" style="transition-delay: 200ms;">
-                <div class="w-16 h-16 rounded-2xl bg-purple-500/10 flex items-center justify-center mb-6 border border-purple-500/30">
-                    <i class="fa-solid fa-mobile-screen-button text-3xl text-purple-400"></i>
+            <div class="tilt-card p-8 sm:p-10 flex flex-col h-full reveal-up" style="transition-delay: 200ms;">
+                <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-purple-500/10 flex items-center justify-center mb-6 border border-purple-500/30">
+                    <i class="fa-solid fa-mobile-screen-button text-2xl sm:text-3xl text-purple-400"></i>
                 </div>
                 <div class="card-content">
-                    <h3 class="text-2xl font-bold text-white mb-4 font-['Orbitron']">Mobile-First Dizajn</h3>
-                    <p class="text-gray-400 leading-relaxed text-base">Većina pregleda danas dolazi sa telefona. Moji sajtovi su 100% responzivni, što znači da izgledaju i rade besprijekorno na apsolutno svakom ekranu i uređaju.</p>
+                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-4 font-['Orbitron']">Mobile-First Dizajn</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm sm:text-base">Većina pregleda danas dolazi sa telefona. Moji sajtovi su 100% responzivni, što znači da izgledaju i rade besprijekorno na apsolutno svakom ekranu i uređaju.</p>
                 </div>
             </div>
 
-            <div class="tilt-card p-10 flex flex-col h-full reveal-right" style="transition-delay: 400ms;">
-                <div class="w-16 h-16 rounded-2xl bg-pink-500/10 flex items-center justify-center mb-6 border border-pink-500/30">
-                    <i class="fa-solid fa-store text-3xl text-pink-400"></i>
+            <div class="tilt-card p-8 sm:p-10 flex flex-col h-full reveal-right" style="transition-delay: 400ms;">
+                <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-pink-500/10 flex items-center justify-center mb-6 border border-pink-500/30">
+                    <i class="fa-solid fa-store text-2xl sm:text-3xl text-pink-400"></i>
                 </div>
                 <div class="card-content">
-                    <h3 class="text-2xl font-bold text-white mb-4 font-['Orbitron']">Ciljani Biznisi</h3>
-                    <p class="text-gray-400 leading-relaxed text-base">Pomažem lokalnim preduzetnicima da izgrade dominantno digitalno prisustvo. Najčešće kreiram moderna rješenja i platforme za <span class="text-white font-bold">restorane brze hrane, burger barove, i izdavanje luksuznih vikendica</span>.</p>
+                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-4 font-['Orbitron']">Ciljani Biznisi</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm sm:text-base">Pomažem lokalnim preduzetnicima da izgrade dominantno digitalno prisustvo. Najčešće kreiram moderna rješenja i platforme za <span class="text-white font-bold">restorane brze hrane, burger barove, i izdavanje luksuznih vikendica</span>.</p>
                 </div>
             </div>
 
@@ -463,16 +469,16 @@
     </section>
 
     <!-- Projekti Sekcija -->
-    <section id="projects" class="min-h-screen py-32 px-4 sm:px-8 lg:px-16 flex flex-col justify-center relative z-10">
-        <div class="text-center mb-20 reveal-up">
-            <h2 class="text-5xl md:text-6xl font-black text-glow-purple mb-4 uppercase tracking-wider">Istaknuti Projekat</h2>
-            <div class="h-1 w-32 bg-gradient-to-r from-purple-500 via-pink-500 to-transparent mx-auto rounded-full"></div>
+    <section id="projects" class="min-h-screen py-24 sm:py-32 px-4 sm:px-8 lg:px-16 flex flex-col justify-center relative z-10">
+        <div class="text-center mb-16 sm:mb-20 reveal-up">
+            <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-glow-purple mb-4 uppercase tracking-wider">Istaknuti Projekat</h2>
+            <div class="h-1 w-24 sm:w-32 bg-gradient-to-r from-purple-500 via-pink-500 to-transparent mx-auto rounded-full"></div>
         </div>
 
         <div class="max-w-7xl mx-auto w-full">
             <div class="tilt-card flex flex-col lg:flex-row items-stretch reveal-up shadow-[0_0_30px_rgba(188,19,254,0.15)]">
                 
-                <div class="w-full lg:w-3/5 relative min-h-[350px] lg:min-h-[600px] overflow-hidden rounded-t-2xl lg:rounded-l-2xl lg:rounded-tr-none border-b lg:border-b-0 lg:border-r border-white/10 group bg-black video-container">
+                <div class="w-full lg:w-3/5 relative min-h-[250px] sm:min-h-[350px] lg:min-h-[600px] overflow-hidden rounded-t-2xl lg:rounded-l-2xl lg:rounded-tr-none border-b lg:border-b-0 lg:border-r border-white/10 group bg-black video-container">
                     <div class="absolute inset-0 bg-gradient-to-tr from-purple-900/40 via-transparent to-cyan-900/40 z-30 opacity-40 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none"></div>
                     <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-20 transition-transform duration-700 group-hover:scale-105">
                         <source src="0919.mp4" type="video/mp4">
@@ -480,25 +486,25 @@
                     </video>
                 </div>
 
-                <div class="w-full lg:w-2/5 p-8 md:p-12 lg:p-16 flex flex-col justify-center card-content bg-gradient-to-b from-transparent to-black/40">
+                <div class="w-full lg:w-2/5 p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col justify-center card-content bg-gradient-to-b from-transparent to-black/40">
                     
-                    <h3 class="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-widest text-glow-purple mb-6 uppercase">
+                    <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-widest text-glow-purple mb-4 sm:mb-6 uppercase">
                         Kod Ukletog<br>Holanđanina
                     </h3>
                     
-                    <div class="flex flex-wrap items-center gap-3 mb-8">
-                        <span class="px-4 py-1.5 text-sm font-bold bg-cyan-500/10 text-cyan-400 rounded-md border border-cyan-500/30 backdrop-blur-sm"><i class="fa-brands fa-html5 mr-1"></i> HTML5</span>
-                        <span class="px-4 py-1.5 text-sm font-bold bg-purple-500/10 text-purple-400 rounded-md border border-purple-500/30 backdrop-blur-sm"><i class="fa-brands fa-css3-alt mr-1"></i> CSS3</span>
-                        <span class="px-4 py-1.5 text-sm font-bold bg-yellow-500/10 text-yellow-400 rounded-md border border-yellow-500/30 backdrop-blur-sm"><i class="fa-brands fa-js mr-1"></i> JS ES6</span>
+                    <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-6 sm:mb-8">
+                        <span class="px-3 py-1.5 text-xs sm:text-sm font-bold bg-cyan-500/10 text-cyan-400 rounded-md border border-cyan-500/30 backdrop-blur-sm"><i class="fa-brands fa-html5 mr-1"></i> HTML5</span>
+                        <span class="px-3 py-1.5 text-xs sm:text-sm font-bold bg-purple-500/10 text-purple-400 rounded-md border border-purple-500/30 backdrop-blur-sm"><i class="fa-brands fa-css3-alt mr-1"></i> CSS3</span>
+                        <span class="px-3 py-1.5 text-xs sm:text-sm font-bold bg-yellow-500/10 text-yellow-400 rounded-md border border-yellow-500/30 backdrop-blur-sm"><i class="fa-brands fa-js mr-1"></i> JS ES6</span>
                     </div>
                     
-                    <p class="text-gray-300 text-lg md:text-xl mb-12 leading-relaxed font-light">
+                    <p class="text-gray-300 text-sm sm:text-lg md:text-xl mb-8 sm:mb-12 leading-relaxed font-light">
                         Kompleksna interaktivna platforma koja pomjera granice frontend dizajna. Obiluje bogatim vizuelnim efektima, animacijama i optimizovana je za maksimalne performanse.
                     </p>
                     
-                    <a href="https://www.kodukletogholandjanina.com/" target="_blank" rel="noopener noreferrer" class="neon-btn self-start group">
+                    <a href="https://www.kodukletogholandjanina.com/" target="_blank" rel="noopener noreferrer" class="neon-btn self-start group text-xs sm:text-sm px-6 py-3 sm:px-9 sm:py-4">
                         <span>Pogledaj Projekat</span> 
-                        <i class="fa-solid fa-rocket ml-4 text-xl group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform"></i>
+                        <i class="fa-solid fa-rocket ml-2 sm:ml-4 text-lg sm:text-xl group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform"></i>
                     </a>
                 </div>
             </div>
@@ -506,22 +512,22 @@
     </section>
 
     <!-- Footer Sekcija -->
-    <section class="py-32 px-4 text-center reveal-up relative z-10 flex flex-col items-center justify-center min-h-[50vh]">
-        <h2 class="text-4xl md:text-5xl font-black text-white mb-6 uppercase tracking-wider font-['Orbitron']">Spreman za novi projekat?</h2>
-        <p class="text-xl text-gray-400 mb-10">Kontaktiraj me i hajde da napravimo nešto nevjerovatno.</p>
-        <button class="open-modal-btn neon-btn">
+    <section class="py-24 sm:py-32 px-4 text-center reveal-up relative z-10 flex flex-col items-center justify-center min-h-[50vh]">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4 sm:mb-6 uppercase tracking-wider font-['Orbitron']">Spreman za novi projekat?</h2>
+        <p class="text-base sm:text-xl text-gray-400 mb-8 sm:mb-10">Kontaktiraj me i hajde da napravimo nešto nevjerovatno.</p>
+        <button class="open-modal-btn neon-btn text-xs sm:text-sm px-6 py-3 sm:px-9 sm:py-4">
             <span>POKRENI KOMUNIKACIJU</span> 
-            <i class="fa-solid fa-satellite-dish ml-4 text-xl"></i>
+            <i class="fa-solid fa-satellite-dish ml-2 sm:ml-4 text-lg sm:text-xl"></i>
         </button>
     </section>
 
-    <footer class="py-10 text-center border-t border-white/10 bg-black/80 backdrop-blur-xl relative z-10">
+    <footer class="py-8 sm:py-10 text-center border-t border-white/10 bg-black/80 backdrop-blur-xl relative z-10 px-4">
         <div class="flex justify-center items-center gap-4 mb-4">
             <div class="w-8 h-[1px] bg-cyan-500/50"></div>
-            <span class="text-cyan-400 font-bold tracking-widest font-['Orbitron'] text-sm">SP // DEV</span>
+            <span class="text-cyan-400 font-bold tracking-widest font-['Orbitron'] text-xs sm:text-sm">SP // DEV</span>
             <div class="w-8 h-[1px] bg-purple-500/50"></div>
         </div>
-        <p class="text-gray-500 text-sm font-['Space_Grotesk'] tracking-wide">
+        <p class="text-gray-500 text-xs sm:text-sm font-['Space_Grotesk'] tracking-wide">
             &copy; 2026 Srećko Prodanović. Sva prava zadržana. <br>
             <span class="text-cyan-600/70 block mt-2">Arhitektura & Dizajn realizovani u Kragujevcu.</span>
         </p>
@@ -579,7 +585,6 @@
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 contactModal.classList.remove('hidden');
-                // Dodajemo flex klasu da bi modal bio centriran
                 contactModal.classList.add('flex');
                 
                 setTimeout(() => {
@@ -597,20 +602,17 @@
             modalContent.classList.add('scale-95');
             setTimeout(() => {
                 contactModal.classList.add('hidden');
-                // Skidamo flex klasu kada se sakrije
                 contactModal.classList.remove('flex');
             }, 300);
         };
 
         closeModalBtn.addEventListener('click', closeModal);
         
-        // Zatvori ako se klikne van modala (na crnu pozadinu)
         contactModal.addEventListener('click', (e) => {
             if(e.target === contactModal) {
                 closeModal();
             }
         });
-
 
         // --- 3. Custom Kursor logika ---
         const cursorDot = document.querySelector('.cursor-dot');
