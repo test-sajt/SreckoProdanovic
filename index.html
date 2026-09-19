@@ -3,72 +3,694 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Srećko Prodanović - Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- Pozadinski efekti -->
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
+    <title>Srećko Prodanović | Web Developer</title>
     
-    <!-- Custom kursor (svetlo koje prati miš) -->
-    <div class="cursor-glow"></div>
+    <!-- Tailwind CSS za osnovni layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome za ikonice -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fontovi: Orbitron za sci-fi naslove, Space Grotesk za tekst -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
 
-    <main class="container">
-        <section class="hero tilt-effect">
-            <div class="profile-wrapper">
-                <div class="profile-glow"></div>
-                <!-- Slika mora biti nazvana ja.png i nalaziti se u istom folderu -->
-                <img src="sl/ja.png" alt="Srećko Prodanović" class="profile-img">
-            </div>
-            
-            <h1 class="gradient-text">Srećko Prodanović</h1>
-            <p class="subtitle"><span id="typing-text"></span><span class="cursor">|</span></p>
-            
-            <div class="location">
-                <i class="fa-solid fa-location-dot"></i> Kragujevac, Srbija
-            </div>
-        </section>
+    <style>
+        :root {
+            --bg-color: #030014;
+            --bg-darker: #01000a;
+            --neon-cyan: #00f3ff;
+            --neon-purple: #bc13fe;
+            --text-main: #e2e8f0;
+        }
 
-        <section class="projects">
-            <div class="glass-card project-card tilt-effect">
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        /* Sakrivamo kursor samo na uređajima koji koriste miš */
+        @media (pointer: fine) {
+            body { cursor: none; }
+        }
+
+        h1, h2, h3, .sci-fi-text {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* --- Custom Kursor --- */
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--neon-cyan);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+            transition: width 0.2s, height 0.2s;
+            display: none;
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--neon-purple);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: top 0.1s, left 0.1s, width 0.2s, height 0.2s, border-color 0.2s, background-color 0.2s;
+            box-shadow: 0 0 15px rgba(188, 19, 254, 0.5);
+            display: none;
+        }
+        @media (pointer: fine) {
+            .cursor-dot, .cursor-outline { display: block; }
+        }
+
+        /* --- Napredni WOW Loader --- */
+        #loader {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: var(--bg-darker);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s cubic-bezier(0.64, 0, 0.78, 0), transform 1.5s cubic-bezier(0.64, 0, 0.78, 0);
+        }
+        
+        .loader-core {
+            position: relative;
+            width: 250px; height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .loader-ring-outer {
+            position: absolute;
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: var(--neon-cyan);
+            border-bottom-color: var(--neon-purple);
+            animation: spin-fast 1.5s linear infinite;
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
+        }
+
+        .loader-ring-inner {
+            position: absolute;
+            width: 80%; height: 80%;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-left-color: var(--neon-purple);
+            border-right-color: var(--neon-cyan);
+            animation: spin-fast 1s linear infinite reverse;
+            box-shadow: inset 0 0 20px rgba(188, 19, 254, 0.3);
+        }
+
+        .loader-content {
+            position: absolute;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .loader-role {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            letter-spacing: 5px;
+            color: var(--neon-cyan);
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 0.5s;
+            text-transform: uppercase;
+        }
+
+        .loader-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 22px;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 0 15px var(--neon-purple);
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 1.2s;
+        }
+
+        .loader-terminal {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 2px;
+            height: 20px;
+            text-shadow: 0 0 5px var(--neon-cyan);
+        }
+
+        /* --- Background Animacija --- */
+        .bg-orbs {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1; overflow: hidden;
+            background: radial-gradient(circle at center, #0a001a 0%, #030014 100%);
+        }
+        .orb {
+            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.5;
+            animation: float 25s infinite ease-in-out alternate;
+        }
+        .orb-1 { width: 500px; height: 500px; background: var(--neon-purple); top: -15%; left: -10%; }
+        .orb-2 { width: 400px; height: 400px; background: var(--neon-cyan); bottom: -10%; right: -5%; animation-delay: -5s; }
+
+        /* Glow Tekst */
+        .text-glow-cyan {
+            text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan), 0 0 40px rgba(0, 243, 255, 0.6);
+            color: #fff;
+        }
+        .text-glow-purple {
+            text-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-purple), 0 0 40px rgba(188, 19, 254, 0.6);
+            color: #fff;
+        }
+
+        /* --- Masivna Profilna Slika --- */
+        .profile-img-container {
+            position: relative;
+            width: 220px; height: 220px; 
+            margin: 0 auto 3rem auto;
+            border-radius: 50%;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        @media (min-width: 768px) {
+            .profile-img-container { width: 320px; height: 320px; }
+        }
+        .profile-img-container::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, transparent 0%, var(--neon-cyan) 25%, transparent 50%, var(--neon-purple) 75%, transparent 100%);
+            z-index: -1;
+            animation: spin 5s linear infinite;
+            filter: drop-shadow(0 0 20px var(--neon-cyan)) drop-shadow(0 0 40px var(--neon-purple));
+        }
+        .profile-img-container::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            background: var(--bg-color);
+            z-index: -1;
+        }
+        .profile-img {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 2;
+            transition: transform 0.5s ease;
+        }
+        .profile-img-container:hover .profile-img {
+            transform: scale(1.05);
+        }
+
+        /* 3D Glassmorphism Kartice */
+        .tilt-card {
+            background: rgba(10, 10, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            backdrop-filter: blur(15px);
+            transform-style: preserve-3d;
+            transition: transform 0.1s, box-shadow 0.3s, border-color 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .tilt-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transform: skewX(-20deg);
+            transition: 0.7s;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .tilt-card:hover::after { left: 150%; }
+        .tilt-card:hover {
+            box-shadow: 0 20px 50px rgba(0, 243, 255, 0.15), 0 0 30px rgba(188, 19, 254, 0.15);
+            border-color: rgba(0, 243, 255, 0.4);
+        }
+        .card-content { transform: translateZ(60px); z-index: 2; position: relative; }
+
+        /* Neonsko Dugme */
+        .neon-btn {
+            position: relative; display: inline-flex; align-items: center; justify-content: center;
+            padding: 16px 36px; color: var(--neon-cyan);
+            text-transform: uppercase; letter-spacing: 3px;
+            font-family: 'Orbitron'; font-weight: bold; font-size: 14px;
+            text-decoration: none; overflow: hidden; transition: 0.3s;
+            border: 1px solid var(--neon-cyan); border-radius: 8px;
+            background: rgba(0, 243, 255, 0.05);
+            box-shadow: 0 0 15px transparent inset;
+            z-index: 2;
+            cursor: pointer;
+        }
+        .neon-btn:hover {
+            color: var(--bg-color); background: var(--neon-cyan);
+            box-shadow: 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-cyan), 0 0 60px var(--neon-cyan);
+            transform: translateY(-2px);
+        }
+
+        /* Napredne Scroll Animacije */
+        .reveal-up { opacity: 0; transform: translateY(60px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal-left { opacity: 0; transform: translateX(-60px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal-right { opacity: 0; transform: translateX(60px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
+        
+        .reveal-up.active, .reveal-left.active, .reveal-right.active {
+            opacity: 1; transform: translate(0);
+        }
+
+        /* Keyframes */
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes spin-fast { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(5vw, 5vh) scale(1.1); } 100% { transform: translate(-5vw, 10vh) scale(0.9); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        @keyframes type { from { width: 0; } to { width: 100%; } }
+        @keyframes blink { 50% { border-color: transparent; } }
+
+        .typing-container {
+            display: inline-block; overflow: hidden; white-space: nowrap;
+            border-right: 4px solid var(--neon-cyan);
+            animation: type 3.5s steps(40, end), blink 0.8s step-end infinite;
+            padding-right: 10px;
+        }
+
+        /* Video stilovi za apsolutnu popunjenost */
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-cyan-500 selection:text-white">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- WOW Loading Screen -->
+    <div id="loader">
+        <div class="loader-core">
+            <div class="loader-ring-outer"></div>
+            <div class="loader-ring-inner"></div>
+            <div class="loader-content">
+                <div class="loader-role">Web Developer</div>
+                <div class="loader-name">SREĆKO<br>PRODANOVIĆ</div>
+            </div>
+        </div>
+        <div class="loader-terminal" id="loader-terminal">> Inicijalizacija sistema...</div>
+    </div>
+
+    <!-- Modal za Kontakt -->
+    <div id="contact-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300">
+        <div class="tilt-card p-6 md:p-12 w-[92%] max-w-lg relative flex flex-col gap-4 md:gap-6 transform scale-95 transition-transform duration-300 border border-cyan-500/30" id="modal-content">
+            <!-- X Dugme za zatvaranje -->
+            <button id="close-modal" class="absolute top-3 right-4 md:top-4 md:right-5 text-gray-400 hover:text-cyan-400 text-3xl z-10 transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <h3 class="text-2xl md:text-4xl font-black text-glow-cyan text-center uppercase mb-1 md:mb-2 mt-4 md:mt-0">Kontakt Mreža</h3>
+            <p class="text-gray-400 text-sm md:text-base text-center mb-4 md:mb-6 font-light">Odaberi kanal za komunikaciju</p>
+            
+            <!-- Linkovi u Modalu -->
+            <a href="tel:0612006959" class="flex items-center gap-4 md:gap-6 p-4 md:p-5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/5 hover:border-cyan-500/50 transition-all group">
+                <div class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 rounded-full bg-cyan-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-phone text-lg md:text-2xl text-cyan-400"></i>
+                </div>
+                <div class="flex flex-col overflow-hidden">
+                    <span class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider mb-1">Direktna Linija</span>
+                    <span class="text-lg md:text-xl font-bold text-white tracking-widest group-hover:text-cyan-300">061 200 6959</span>
+                </div>
+            </a>
+
+            <a href="mailto:Prodanovicsrecko19@gmail.com" class="flex items-center gap-4 md:gap-6 p-4 md:p-5 rounded-xl bg-white/5 hover:bg-purple-500/20 border border-white/5 hover:border-purple-500/50 transition-all group">
+                <div class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 rounded-full bg-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-envelope text-lg md:text-2xl text-purple-400"></i>
+                </div>
+                <div class="flex flex-col overflow-hidden">
+                    <span class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider mb-1">Email Terminal</span>
+                    <span class="text-sm md:text-base font-bold text-white tracking-wide group-hover:text-purple-300 truncate">Prodanovicsrecko19@gmail.com</span>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/_srecko_2007_/" target="_blank" class="flex items-center gap-4 md:gap-6 p-4 md:p-5 rounded-xl bg-white/5 hover:bg-pink-500/20 border border-white/5 hover:border-pink-500/50 transition-all group">
+                <div class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 rounded-full bg-pink-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <i class="fa-brands fa-instagram text-2xl md:text-3xl text-pink-400"></i>
+                </div>
+                <div class="flex flex-col overflow-hidden">
+                    <span class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider mb-1">Instagram</span>
+                    <span class="text-lg md:text-xl font-bold text-white tracking-widest group-hover:text-pink-300 truncate">@_srecko_2007_</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Animirana pozadina -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <!-- PRILAGOĐENA NAVIGACIJA ZA SVE UREĐAJE (U JEDNOM REDU) -->
+    <nav class="fixed top-0 w-full px-3 py-4 md:p-6 z-50 flex justify-between items-center bg-black/30 backdrop-blur-md border-b border-white/5 transition-all duration-300">
+        <div class="sci-fi-text text-base min-[380px]:text-lg md:text-2xl font-bold tracking-widest text-glow-cyan">SP_</div>
+        <div class="flex gap-[6px] min-[380px]:gap-3 sm:gap-6 md:gap-8 font-bold tracking-widest text-[9px] min-[380px]:text-[10px] sm:text-sm md:text-base uppercase items-center whitespace-nowrap">
+            <a href="#home" class="text-gray-400 hover:text-cyan-400 hover:drop-shadow-[0_0_12px_rgba(0,243,255,0.9)] focus:text-white focus:drop-shadow-[0_0_20px_rgba(0,243,255,1)] active:drop-shadow-[0_0_30px_rgba(0,243,255,1)] active:scale-95 transition-all duration-200">POČETNA</a>
+            <a href="#services" class="text-gray-400 hover:text-purple-400 hover:drop-shadow-[0_0_12px_rgba(188,19,254,0.9)] focus:text-white focus:drop-shadow-[0_0_20px_rgba(188,19,254,1)] active:drop-shadow-[0_0_30px_rgba(188,19,254,1)] active:scale-95 transition-all duration-200">EKSPERTIZA</a>
+            <a href="#projects" class="text-gray-400 hover:text-cyan-400 hover:drop-shadow-[0_0_12px_rgba(0,243,255,0.9)] focus:text-white focus:drop-shadow-[0_0_20px_rgba(0,243,255,1)] active:drop-shadow-[0_0_30px_rgba(0,243,255,1)] active:scale-95 transition-all duration-200">PROJEKTI</a>
+            <button class="open-modal-btn text-cyan-400 hover:text-white hover:drop-shadow-[0_0_12px_rgba(0,243,255,0.9)] focus:drop-shadow-[0_0_20px_rgba(0,243,255,1)] active:drop-shadow-[0_0_30px_rgba(0,243,255,1)] active:scale-95 transition-all duration-200 font-bold">KONTAKT</button>
+        </div>
+    </nav>
+
+    <!-- Hero Sekcija -->
+    <header id="home" class="min-h-screen flex flex-col justify-center items-center relative px-4 text-center pt-28 overflow-hidden">
+        
+        <div class="profile-img-container reveal-up" style="transition-delay: 200ms;">
+            <img src="sl/ja.png" alt="Srećko Prodanović" class="profile-img">
+        </div>
+
+        <p class="text-cyan-400 font-bold tracking-[0.4em] mb-6 uppercase reveal-up text-xs md:text-sm" style="transition-delay: 400ms;">
+            <i class="fa-solid fa-bolt mr-2 text-yellow-400"></i> Sistem Aktiviran
+        </p>
+        
+        <div class="inline-block max-w-full reveal-up" style="transition-delay: 600ms;">
+            <h1 class="typing-container text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-4 text-glow-purple mx-auto">
+                SREĆKO PRODANOVIĆ
+            </h1>
+        </div>
+        
+        <h2 class="text-xl md:text-3xl lg:text-4xl text-gray-300 font-light reveal-up mt-6 flex items-center justify-center gap-3" style="transition-delay: 800ms;">
+            <span class="text-cyan-400 font-['Orbitron'] tracking-widest">WEB DEVELOPER</span> 
+            <span class="w-1.5 h-1.5 bg-purple-500 rounded-full mx-2"></span>
+            <span><i class="fa-solid fa-location-dot text-purple-400 mr-2"></i> Kragujevac</span>
+        </h2>
+        
+        <p class="mt-8 max-w-2xl text-gray-400 text-base md:text-xl reveal-up leading-relaxed" style="transition-delay: 1000ms;">
+            Kreativni arhitekta digitalnih iskustava. Specijalizovan za izradu interaktivnih, ekstremno brzih i vizuelno dominantnih web aplikacija koje ostavljaju utisak.
+        </p>
+
+        <a href="#services" class="mt-16 text-cyan-400 text-4xl animate-bounce reveal-up cursor-pointer inline-block hover:text-purple-400 transition-colors" style="transition-delay: 1200ms;">
+            <i class="fa-solid fa-angles-down text-glow-cyan"></i>
+        </a>
+    </header>
+
+    <!-- NOVA SEKCIJA -->
+    <section id="services" class="min-h-screen py-32 px-4 sm:px-8 lg:px-16 flex flex-col justify-center relative z-10">
+        <div class="text-center mb-20 reveal-up">
+            <h2 class="text-5xl md:text-6xl font-black text-glow-cyan mb-4 uppercase tracking-wider">Moja Ekspertiza</h2>
+            <div class="h-1 w-32 bg-gradient-to-r from-cyan-400 via-purple-500 to-transparent mx-auto rounded-full"></div>
+            <p class="mt-6 text-gray-400 text-lg max-w-2xl mx-auto">Šta tačno radim i kako mogu unaprijediti tvoje poslovanje.</p>
+        </div>
+
+        <div class="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div class="tilt-card p-10 flex flex-col h-full reveal-left">
+                <div class="w-16 h-16 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6 border border-cyan-500/30">
+                    <i class="fa-solid fa-code text-3xl text-cyan-400"></i>
+                </div>
                 <div class="card-content">
-                    <h2><i class="fa-solid fa-code"></i> Istaknuti Projekat</h2>
-                    <p>Izrada unikatnih i profesionalnih sajtova visokih performansi.</p>
-                    <a href="https://www.kodukletogholandjanina.com/" target="_blank" class="btn">
-                        kodukletogholandjanina.com <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <h3 class="text-2xl font-bold text-white mb-4 font-['Orbitron']">Front-End Dev</h3>
+                    <p class="text-gray-400 leading-relaxed text-base mb-6">Kreiram arhitekturu vizuelno impresivnih web platformi. Koristim najmodernije tehnologije kako bi tvoj sajt bio brz, stabilan i siguran.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="px-3 py-1 text-xs font-bold bg-white/5 rounded border border-white/10 text-gray-300">HTML5</span>
+                        <span class="px-3 py-1 text-xs font-bold bg-white/5 rounded border border-white/10 text-gray-300">CSS3</span>
+                        <span class="px-3 py-1 text-xs font-bold bg-white/5 rounded border border-white/10 text-gray-300">JavaScript ES6</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tilt-card p-10 flex flex-col h-full reveal-up" style="transition-delay: 200ms;">
+                <div class="w-16 h-16 rounded-2xl bg-purple-500/10 flex items-center justify-center mb-6 border border-purple-500/30">
+                    <i class="fa-solid fa-mobile-screen-button text-3xl text-purple-400"></i>
+                </div>
+                <div class="card-content">
+                    <h3 class="text-2xl font-bold text-white mb-4 font-['Orbitron']">Mobile-First Dizajn</h3>
+                    <p class="text-gray-400 leading-relaxed text-base">Većina pregleda danas dolazi sa telefona. Moji sajtovi su 100% responzivni, što znači da izgledaju i rade besprijekorno na apsolutno svakom ekranu i uređaju.</p>
+                </div>
+            </div>
+
+            <div class="tilt-card p-10 flex flex-col h-full reveal-right" style="transition-delay: 400ms;">
+                <div class="w-16 h-16 rounded-2xl bg-pink-500/10 flex items-center justify-center mb-6 border border-pink-500/30">
+                    <i class="fa-solid fa-store text-3xl text-pink-400"></i>
+                </div>
+                <div class="card-content">
+                    <h3 class="text-2xl font-bold text-white mb-4 font-['Orbitron']">Ciljani Biznisi</h3>
+                    <p class="text-gray-400 leading-relaxed text-base">Pomažem lokalnim preduzetnicima da izgrade dominantno digitalno prisustvo. Najčešće kreiram moderna rješenja i platforme za <span class="text-white font-bold">restorane brze hrane, burger barove, i izdavanje luksuznih vikendica</span>.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Projekti Sekcija -->
+    <section id="projects" class="min-h-screen py-32 px-4 sm:px-8 lg:px-16 flex flex-col justify-center relative z-10">
+        <div class="text-center mb-20 reveal-up">
+            <h2 class="text-5xl md:text-6xl font-black text-glow-purple mb-4 uppercase tracking-wider">Istaknuti Projekat</h2>
+            <div class="h-1 w-32 bg-gradient-to-r from-purple-500 via-pink-500 to-transparent mx-auto rounded-full"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto w-full">
+            <div class="tilt-card flex flex-col lg:flex-row items-stretch reveal-up shadow-[0_0_30px_rgba(188,19,254,0.15)]">
+                
+                <div class="w-full lg:w-3/5 relative min-h-[350px] lg:min-h-[600px] overflow-hidden rounded-t-2xl lg:rounded-l-2xl lg:rounded-tr-none border-b lg:border-b-0 lg:border-r border-white/10 group bg-black video-container">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-purple-900/40 via-transparent to-cyan-900/40 z-30 opacity-40 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none"></div>
+                    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-20 transition-transform duration-700 group-hover:scale-105">
+                        <source src="0919.mp4" type="video/mp4">
+                        Vaš pretraživač ne podržava HTML5 video.
+                    </video>
+                </div>
+
+                <div class="w-full lg:w-2/5 p-8 md:p-12 lg:p-16 flex flex-col justify-center card-content bg-gradient-to-b from-transparent to-black/40">
+                    
+                    <h3 class="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-widest text-glow-purple mb-6 uppercase">
+                        Kod Ukletog<br>Holanđanina
+                    </h3>
+                    
+                    <div class="flex flex-wrap items-center gap-3 mb-8">
+                        <span class="px-4 py-1.5 text-sm font-bold bg-cyan-500/10 text-cyan-400 rounded-md border border-cyan-500/30 backdrop-blur-sm"><i class="fa-brands fa-html5 mr-1"></i> HTML5</span>
+                        <span class="px-4 py-1.5 text-sm font-bold bg-purple-500/10 text-purple-400 rounded-md border border-purple-500/30 backdrop-blur-sm"><i class="fa-brands fa-css3-alt mr-1"></i> CSS3</span>
+                        <span class="px-4 py-1.5 text-sm font-bold bg-yellow-500/10 text-yellow-400 rounded-md border border-yellow-500/30 backdrop-blur-sm"><i class="fa-brands fa-js mr-1"></i> JS ES6</span>
+                    </div>
+                    
+                    <p class="text-gray-300 text-lg md:text-xl mb-12 leading-relaxed font-light">
+                        Kompleksna interaktivna platforma koja pomjera granice frontend dizajna. Obiluje bogatim vizuelnim efektima, animacijama i optimizovana je za maksimalne performanse.
+                    </p>
+                    
+                    <a href="https://www.kodukletogholandjanina.com/" target="_blank" rel="noopener noreferrer" class="neon-btn self-start group">
+                        <span>Pogledaj Projekat</span> 
+                        <i class="fa-solid fa-rocket ml-4 text-xl group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform"></i>
                     </a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="contact">
-            <a href="tel:0612006959" class="glass-card contact-card tilt-effect">
-                <div class="icon-box"><i class="fa-solid fa-phone"></i></div>
-                <h3>Telefon</h3>
-                <p>061 200 6959</p>
-            </a>
-            
-            <a href="mailto:Prodanovicsrecko19@gmail.com" class="glass-card contact-card tilt-effect">
-                <div class="icon-box"><i class="fa-solid fa-envelope"></i></div>
-                <h3>E-mail</h3>
-                <p>Prodanovicsrecko19@gmail.com</p>
-            </a>
+    <!-- Footer Sekcija -->
+    <section class="py-32 px-4 text-center reveal-up relative z-10 flex flex-col items-center justify-center min-h-[50vh]">
+        <h2 class="text-4xl md:text-5xl font-black text-white mb-6 uppercase tracking-wider font-['Orbitron']">Spreman za novi projekat?</h2>
+        <p class="text-xl text-gray-400 mb-10">Kontaktiraj me i hajde da napravimo nešto nevjerovatno.</p>
+        <button class="open-modal-btn neon-btn">
+            <span>POKRENI KOMUNIKACIJU</span> 
+            <i class="fa-solid fa-satellite-dish ml-4 text-xl"></i>
+        </button>
+    </section>
 
-            <a href="https://www.instagram.com/_srecko_2007_/" target="_blank" class="glass-card contact-card tilt-effect">
-                <div class="icon-box instagram"><i class="fa-brands fa-instagram"></i></div>
-                <h3>Instagram</h3>
-                <p>@_srecko_2007_</p>
-            </a>
-        </section>
-    </main>
-    
-    <footer>
-        <p>&copy; 2026 Srećko Prodanović. Sva prava zadržana.</p>
+    <footer class="py-10 text-center border-t border-white/10 bg-black/80 backdrop-blur-xl relative z-10">
+        <div class="flex justify-center items-center gap-4 mb-4">
+            <div class="w-8 h-[1px] bg-cyan-500/50"></div>
+            <span class="text-cyan-400 font-bold tracking-widest font-['Orbitron'] text-sm">SP // DEV</span>
+            <div class="w-8 h-[1px] bg-purple-500/50"></div>
+        </div>
+        <p class="text-gray-500 text-sm font-['Space_Grotesk'] tracking-wide">
+            &copy; 2026 Srećko Prodanović. Sva prava zadržana. <br>
+            <span class="text-cyan-600/70 block mt-2">Arhitektura & Dizajn realizovani u Kragujevcu.</span>
+        </p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // --- 1. Napredna WOW Loader Logika ---
+        const loader = document.getElementById('loader');
+        const terminal = document.getElementById('loader-terminal');
+        
+        const techStack = [
+            'Povezivanje na server...', 
+            'Učitavanje HTML5 DOM-a...', 
+            'Renderovanje CSS3 modula...', 
+            'Kompajliranje JS ES6 skripti...', 
+            'Inicijalizacija 3D WebGL engine-a...', 
+            'Učitavanje neonskih UI resursa...'
+        ];
+        
+        let step = 0;
+        
+        const terminalInterval = setInterval(() => {
+            if (step < techStack.length) {
+                terminal.innerText = `> ${techStack[step]}`;
+                step++;
+            } else {
+                clearInterval(terminalInterval);
+                terminal.innerText = "> Sistem je spreman. Dobrodošli.";
+                terminal.classList.add('text-glow-cyan');
+                terminal.style.color = '#00f3ff';
+                terminal.style.fontWeight = 'bold';
+                
+                setTimeout(() => {
+                    loader.style.transform = 'scale(1.1)';
+                    loader.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                        document.body.style.overflowY = 'auto'; 
+                    }, 1000);
+                }, 800);
+            }
+        }, 350); 
+
+        document.body.style.overflowY = 'hidden';
+
+        // --- 2. MODAL LOGIKA ZA KONTAKT ---
+        const contactModal = document.getElementById('contact-modal');
+        const modalContent = document.getElementById('modal-content');
+        const openModalBtns = document.querySelectorAll('.open-modal-btn');
+        const closeModalBtn = document.getElementById('close-modal');
+
+        // Funkcija za otvaranje
+        openModalBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                contactModal.classList.remove('hidden');
+                // Dodajemo flex klasu da bi modal bio centriran
+                contactModal.classList.add('flex');
+                
+                setTimeout(() => {
+                    contactModal.classList.remove('opacity-0');
+                    modalContent.classList.remove('scale-95');
+                    modalContent.classList.add('scale-100');
+                }, 10);
+            });
+        });
+
+        // Funkcija za zatvaranje
+        const closeModal = () => {
+            contactModal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                contactModal.classList.add('hidden');
+                // Skidamo flex klasu kada se sakrije
+                contactModal.classList.remove('flex');
+            }, 300);
+        };
+
+        closeModalBtn.addEventListener('click', closeModal);
+        
+        // Zatvori ako se klikne van modala (na crnu pozadinu)
+        contactModal.addEventListener('click', (e) => {
+            if(e.target === contactModal) {
+                closeModal();
+            }
+        });
+
+
+        // --- 3. Custom Kursor logika ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        
+        if(window.matchMedia("(pointer: fine)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+
+                cursorOutline.style.left = `${posX}px`;
+                cursorOutline.style.top = `${posY}px`;
+            });
+
+            const clickables = document.querySelectorAll('a, button, .tilt-card');
+            clickables.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursorOutline.style.width = '70px';
+                    cursorOutline.style.height = '70px';
+                    cursorOutline.style.borderColor = 'var(--neon-cyan)';
+                    cursorOutline.style.backgroundColor = 'rgba(0, 243, 255, 0.05)';
+                    cursorDot.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursorOutline.style.width = '40px';
+                    cursorOutline.style.height = '40px';
+                    cursorOutline.style.borderColor = 'var(--neon-purple)';
+                    cursorOutline.style.backgroundColor = 'transparent';
+                    cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+                });
+            });
+        }
+
+        // --- 4. Vanila JS 3D Tilt Efekat za kartice ---
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        
+        if(window.matchMedia("(pointer: fine)").matches) {
+            tiltCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left; 
+                    const y = e.clientY - rect.top;  
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = ((y - centerY) / centerY) * -8; 
+                    const rotateY = ((x - centerX) / centerX) * 8;
+                    
+                    card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                });
+            });
+        }
+
+        // --- 5. Intersection Observer za moderne Scroll animacije ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15 
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right').forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
 </body>
 </html>
