@@ -2,7 +2,7 @@
 <html lang="sr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Srećko Prodanović | Web Developer</title>
     
     <!-- Tailwind CSS za osnovni layout -->
@@ -31,6 +31,7 @@
             font-family: 'Space Grotesk', sans-serif;
             overflow-x: hidden;
             margin: 0;
+            width: 100vw;
         }
 
         /* Sakrivamo kursor samo na uređajima koji koriste miš */
@@ -180,8 +181,8 @@
         /* --- Masivna Profilna Slika --- */
         .profile-img-container {
             position: relative;
-            width: 180px; height: 180px;  /* Smanjeno za telefone */
-            margin: 0 auto 2rem auto;
+            width: 150px; height: 150px; /* Smanjeno za savršen prikaz na manjim telefonima */
+            margin: 0 auto 1.5rem auto;
             border-radius: 50%;
             z-index: 10;
             display: flex;
@@ -189,10 +190,10 @@
             align-items: center;
         }
         @media (min-width: 480px) {
-            .profile-img-container { width: 220px; height: 220px; margin-bottom: 3rem; }
+            .profile-img-container { width: 200px; height: 200px; margin-bottom: 2rem; }
         }
         @media (min-width: 768px) {
-            .profile-img-container { width: 320px; height: 320px; }
+            .profile-img-container { width: 280px; height: 280px; margin-bottom: 3rem; }
         }
         
         .profile-img-container::before {
@@ -292,10 +293,14 @@
         @keyframes blink { 50% { border-color: transparent; } }
 
         .typing-container {
-            display: inline-block; overflow: hidden; white-space: nowrap;
+            display: inline-block; 
+            overflow: hidden; 
+            white-space: nowrap;
             border-right: 4px solid var(--neon-cyan);
             animation: type 3.5s steps(40, end), blink 0.8s step-end infinite;
-            padding-right: 10px;
+            padding-right: 8px;
+            margin: 0 auto;
+            max-width: 100%;
         }
 
         /* Video stilovi za apsolutnu popunjenost */
@@ -375,19 +380,19 @@
         <div class="orb orb-2"></div>
     </div>
 
-    <!-- PRILAGOĐENA NAVIGACIJA ZA SVE UREĐAJE -->
-    <nav class="fixed top-0 w-full px-3 py-4 md:p-6 z-50 flex justify-between items-center bg-black/30 backdrop-blur-md border-b border-white/5 transition-all duration-300">
-        <div class="sci-fi-text text-base min-[380px]:text-lg md:text-2xl font-bold tracking-widest text-glow-cyan">SP_</div>
-        <div class="flex gap-[6px] min-[380px]:gap-3 sm:gap-6 md:gap-8 font-bold tracking-widest text-[9px] min-[380px]:text-[10px] sm:text-sm md:text-base uppercase items-center whitespace-nowrap">
-            <a href="#home" class="text-gray-400 hover:text-cyan-400 hover:drop-shadow-[0_0_12px_rgba(0,243,255,0.9)] focus:text-white focus:drop-shadow-[0_0_20px_rgba(0,243,255,1)] active:drop-shadow-[0_0_30px_rgba(0,243,255,1)] active:scale-95 transition-all duration-200">POČETNA</a>
-            <a href="#services" class="text-gray-400 hover:text-purple-400 hover:drop-shadow-[0_0_12px_rgba(188,19,254,0.9)] focus:text-white focus:drop-shadow-[0_0_20px_rgba(188,19,254,1)] active:drop-shadow-[0_0_30px_rgba(188,19,254,1)] active:scale-95 transition-all duration-200">EKSPERTIZA</a>
-            <a href="#projects" class="text-gray-400 hover:text-cyan-400 hover:drop-shadow-[0_0_12px_rgba(0,243,255,0.9)] focus:text-white focus:drop-shadow-[0_0_20px_rgba(0,243,255,1)] active:drop-shadow-[0_0_30px_rgba(0,243,255,1)] active:scale-95 transition-all duration-200">PROJEKTI</a>
-            <button class="open-modal-btn text-cyan-400 hover:text-white hover:drop-shadow-[0_0_12px_rgba(0,243,255,0.9)] focus:drop-shadow-[0_0_20px_rgba(0,243,255,1)] active:drop-shadow-[0_0_30px_rgba(0,243,255,1)] active:scale-95 transition-all duration-200 font-bold">KONTAKT</button>
+    <!-- OPTIMIZOVANA NAVIGACIJA ZA SVE UREĐAJE -->
+    <nav class="fixed top-0 w-full px-4 py-3 md:p-6 z-50 flex flex-col md:flex-row justify-center md:justify-between items-center bg-black/50 backdrop-blur-md border-b border-white/5 transition-all duration-300 gap-2 md:gap-0 shadow-lg shadow-cyan-500/5">
+        <div class="sci-fi-text text-xl md:text-2xl font-bold tracking-widest text-glow-cyan w-full md:w-auto text-center md:text-left">SP_</div>
+        <div class="flex gap-4 sm:gap-6 md:gap-8 font-bold tracking-widest text-[10px] sm:text-sm md:text-base uppercase items-center justify-center flex-wrap w-full md:w-auto">
+            <a href="#home" class="text-gray-400 hover:text-cyan-400 hover:drop-shadow-[0_0_12px_rgba(0,243,255,0.9)] transition-all duration-200">POČETNA</a>
+            <a href="#services" class="text-gray-400 hover:text-purple-400 hover:drop-shadow-[0_0_12px_rgba(188,19,254,0.9)] transition-all duration-200">EKSPERTIZA</a>
+            <a href="#projects" class="text-gray-400 hover:text-cyan-400 hover:drop-shadow-[0_0_12px_rgba(0,243,255,0.9)] transition-all duration-200">PROJEKTI</a>
+            <button class="open-modal-btn text-cyan-400 hover:text-white hover:drop-shadow-[0_0_12px_rgba(0,243,255,0.9)] transition-all duration-200 font-bold">KONTAKT</button>
         </div>
     </nav>
 
     <!-- Hero Sekcija -->
-    <header id="home" class="min-h-screen flex flex-col justify-center items-center relative px-4 text-center pt-28 overflow-hidden">
+    <header id="home" class="min-h-screen flex flex-col justify-center items-center relative px-4 text-center pt-32 overflow-hidden w-full">
         
         <div class="profile-img-container reveal-up" style="transition-delay: 200ms;">
             <img src="sl/ja.png" alt="Srećko Prodanović" class="profile-img">
@@ -397,21 +402,21 @@
             <i class="fa-solid fa-bolt mr-2 text-yellow-400"></i> Sistem Aktiviran
         </p>
         
-        <!-- Prilagođen font naslova za mobilne -->
-        <div class="inline-block max-w-full reveal-up" style="transition-delay: 600ms;">
-            <h1 class="typing-container text-[1.4rem] min-[380px]:text-[1.7rem] sm:text-5xl md:text-6xl lg:text-8xl font-black mb-2 sm:mb-4 text-glow-purple mx-auto">
+        <!-- FIX ZA PREVELIK TEKST: Korišćenje vw (viewport width) i maksimalne širine -->
+        <div class="w-full px-2 max-w-[100vw] reveal-up" style="transition-delay: 600ms;">
+            <h1 class="typing-container text-[6.5vw] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-2 sm:mb-4 text-glow-purple">
                 SREĆKO PRODANOVIĆ
             </h1>
         </div>
         
-        <!-- Prilagođen podnaslov (složen u kolonu na telefonima) -->
-        <h2 class="text-sm min-[380px]:text-base sm:text-xl md:text-3xl lg:text-4xl text-gray-300 font-light reveal-up mt-4 sm:mt-6 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3" style="transition-delay: 800ms;">
+        <!-- Prilagođen podnaslov -->
+        <h2 class="text-[3.5vw] sm:text-xl md:text-3xl lg:text-4xl text-gray-300 font-light reveal-up mt-4 sm:mt-6 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 w-full" style="transition-delay: 800ms;">
             <span class="text-cyan-400 font-['Orbitron'] tracking-widest">WEB DEVELOPER</span> 
             <span class="hidden sm:block w-1.5 h-1.5 bg-purple-500 rounded-full mx-2"></span>
-            <span class="mt-2 sm:mt-0"><i class="fa-solid fa-location-dot text-purple-400 mr-1 sm:mr-2"></i> Kragujevac</span>
+            <span class="mt-2 sm:mt-0 whitespace-nowrap"><i class="fa-solid fa-location-dot text-purple-400 mr-1 sm:mr-2"></i> Kragujevac</span>
         </h2>
         
-        <p class="mt-6 sm:mt-8 max-w-2xl text-gray-400 text-sm sm:text-base md:text-xl reveal-up leading-relaxed" style="transition-delay: 1000ms;">
+        <p class="mt-6 sm:mt-8 max-w-2xl text-gray-400 text-sm sm:text-base md:text-xl reveal-up leading-relaxed px-4" style="transition-delay: 1000ms;">
             Kreativni arhitekta digitalnih iskustava. Specijalizovan za izradu interaktivnih, ekstremno brzih i vizuelno dominantnih web aplikacija koje ostavljaju utisak.
         </p>
 
@@ -420,8 +425,8 @@
         </a>
     </header>
 
-    <!-- NOVA SEKCIJA -->
-    <section id="services" class="min-h-screen py-24 sm:py-32 px-4 sm:px-8 lg:px-16 flex flex-col justify-center relative z-10">
+    <!-- Ekspertiza Sekcija -->
+    <section id="services" class="min-h-screen py-24 sm:py-32 px-4 sm:px-8 lg:px-16 flex flex-col justify-center relative z-10 w-full">
         <div class="text-center mb-16 sm:mb-20 reveal-up">
             <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-glow-cyan mb-4 uppercase tracking-wider">Moja Ekspertiza</h2>
             <div class="h-1 w-24 sm:w-32 bg-gradient-to-r from-cyan-400 via-purple-500 to-transparent mx-auto rounded-full"></div>
@@ -469,7 +474,7 @@
     </section>
 
     <!-- Projekti Sekcija -->
-    <section id="projects" class="min-h-screen py-24 sm:py-32 px-4 sm:px-8 lg:px-16 flex flex-col justify-center relative z-10">
+    <section id="projects" class="min-h-screen py-24 sm:py-32 px-4 sm:px-8 lg:px-16 flex flex-col justify-center relative z-10 w-full">
         <div class="text-center mb-16 sm:mb-20 reveal-up">
             <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-glow-purple mb-4 uppercase tracking-wider">Istaknuti Projekat</h2>
             <div class="h-1 w-24 sm:w-32 bg-gradient-to-r from-purple-500 via-pink-500 to-transparent mx-auto rounded-full"></div>
@@ -512,7 +517,7 @@
     </section>
 
     <!-- Footer Sekcija -->
-    <section class="py-24 sm:py-32 px-4 text-center reveal-up relative z-10 flex flex-col items-center justify-center min-h-[50vh]">
+    <section class="py-24 sm:py-32 px-4 text-center reveal-up relative z-10 flex flex-col items-center justify-center min-h-[50vh] w-full">
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4 sm:mb-6 uppercase tracking-wider font-['Orbitron']">Spreman za novi projekat?</h2>
         <p class="text-base sm:text-xl text-gray-400 mb-8 sm:mb-10">Kontaktiraj me i hajde da napravimo nešto nevjerovatno.</p>
         <button class="open-modal-btn neon-btn text-xs sm:text-sm px-6 py-3 sm:px-9 sm:py-4">
@@ -521,7 +526,7 @@
         </button>
     </section>
 
-    <footer class="py-8 sm:py-10 text-center border-t border-white/10 bg-black/80 backdrop-blur-xl relative z-10 px-4">
+    <footer class="py-8 sm:py-10 text-center border-t border-white/10 bg-black/80 backdrop-blur-xl relative z-10 px-4 w-full">
         <div class="flex justify-center items-center gap-4 mb-4">
             <div class="w-8 h-[1px] bg-cyan-500/50"></div>
             <span class="text-cyan-400 font-bold tracking-widest font-['Orbitron'] text-xs sm:text-sm">SP // DEV</span>
