@@ -1,700 +1,680 @@
 <!DOCTYPE html>
 <html lang="sr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Srećko Prodanović | Web Developer</title>
-    
-    <!-- Tailwind CSS za osnovni layout -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome za ikonice -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fontovi: Orbitron za sci-fi naslove, Space Grotesk za tekst -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#05010f">
+<title>Srećko Prodanović | Web Developer</title>
+<meta name="description" content="Srećko Prodanović, web developer iz Kragujevca. Brzi, moderni sajtovi sa animacijama koji dovode klijente.">
+<meta property="og:title" content="Srećko Prodanović | Web Developer">
+<meta property="og:description" content="Sajtovi koji se pamte. Brzina, animacije, dizajn.">
+<meta property="og:type" content="website">
 
-    <style>
-        :root {
-            --bg-color: #030014;
-            --bg-darker: #01000a;
-            --neon-cyan: #00f3ff;
-            --neon-purple: #bc13fe;
-            --text-main: #e2e8f0;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        html {
-            scroll-behavior: smooth;
-        }
+<style>
+:root{
+  --bg:#05010f;
+  --bg2:#0b0420;
+  --cyan:#00f3ff;
+  --purple:#b517ff;
+  --pink:#ff2bd6;
+  --text:#e8ecf5;
+  --muted:#9aa3b8;
+  --glass:rgba(255,255,255,.04);
+  --line:rgba(255,255,255,.09);
+  --gutter:clamp(18px,5vw,48px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Space Grotesk',system-ui,sans-serif;
+  line-height:1.6;overflow-x:hidden;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+body.lock{overflow:hidden}
+img,video{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h1,h2,h3,.orb-font{font-family:'Orbitron',sans-serif;line-height:1.15}
+::selection{background:var(--purple);color:#fff}
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Space Grotesk', sans-serif;
-            overflow-x: hidden;
-            margin: 0;
-            width: 100vw;
-        }
+@media (pointer:fine){body.has-cursor,body.has-cursor a,body.has-cursor button{cursor:none}}
 
-        /* Sakrivamo kursor samo na uređajima koji koriste miš */
-        @media (pointer: fine) {
-            body { cursor: none; }
-        }
+/* ---------- progress ---------- */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:300;
+  background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
+  box-shadow:0 0 12px var(--cyan),0 0 24px var(--purple)}
 
-        h1, h2, h3, .sci-fi-text {
-            font-family: 'Orbitron', sans-serif;
-        }
+/* ---------- loader ---------- */
+#loader{position:fixed;inset:0;z-index:1000;background:#020008;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:34px;
+  transition:opacity .8s ease,transform 1s ease,visibility .8s}
+#loader.done{opacity:0;transform:scale(1.15);visibility:hidden}
+.ld-core{position:relative;width:min(62vw,230px);aspect-ratio:1;display:grid;place-items:center}
+.ld-core i{position:absolute;inset:0;border-radius:50%;border:3px solid transparent}
+.ld-core .r1{border-top-color:var(--cyan);border-bottom-color:var(--purple);animation:spin 1.4s linear infinite;box-shadow:0 0 30px rgba(0,243,255,.3)}
+.ld-core .r2{inset:12%;border-left-color:var(--pink);border-right-color:var(--cyan);animation:spin 1s linear infinite reverse}
+.ld-core .r3{inset:24%;border-top-color:var(--purple);animation:spin 2s linear infinite}
+.ld-num{font-family:'Orbitron';font-weight:900;font-size:clamp(28px,9vw,40px);
+  background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 14px rgba(0,243,255,.6))}
+.ld-term{font-family:'Courier New',monospace;font-size:13px;color:var(--cyan);letter-spacing:1px;text-shadow:0 0 8px var(--cyan);min-height:20px;text-align:center;padding:0 20px}
+.ld-bar{width:min(70vw,280px);height:3px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden}
+.ld-bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--purple));box-shadow:0 0 12px var(--cyan);transition:width .2s}
 
-        /* --- Custom Kursor --- */
-        .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--neon-cyan);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
-            transition: width 0.2s, height 0.2s;
-            display: none;
-        }
-        .cursor-outline {
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--neon-purple);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9998;
-            transform: translate(-50%, -50%);
-            transition: top 0.1s, left 0.1s, width 0.2s, height 0.2s, border-color 0.2s, background-color 0.2s;
-            box-shadow: 0 0 15px rgba(188, 19, 254, 0.5);
-            display: none;
-        }
-        @media (pointer: fine) {
-            .cursor-dot, .cursor-outline { display: block; }
-        }
+/* ---------- backgrounds ---------- */
+#net{position:fixed;inset:0;z-index:-3;width:100%;height:100%}
+.aurora{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.45;will-change:transform;animation:drift 22s ease-in-out infinite alternate}
+.aurora .a1{width:min(90vw,560px);aspect-ratio:1;background:var(--purple);top:-12%;left:-25%}
+.aurora .a2{width:min(80vw,480px);aspect-ratio:1;background:var(--cyan);bottom:-8%;right:-25%;animation-delay:-7s;opacity:.32}
+.aurora .a3{width:min(60vw,360px);aspect-ratio:1;background:var(--pink);top:45%;left:30%;animation-delay:-12s;opacity:.2}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.07;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.gridlines{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:48px 48px;mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%)}
 
-        /* --- Napredni WOW Loader --- */
-        #loader {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: var(--bg-darker);
-            z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 1s cubic-bezier(0.64, 0, 0.78, 0), transform 1.5s cubic-bezier(0.64, 0, 0.78, 0);
-        }
-        
-        .loader-core {
-            position: relative;
-            width: 250px; height: 250px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 40px;
-        }
+/* ---------- cursor ---------- */
+.cur-dot,.cur-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;display:none;transform:translate(-50%,-50%)}
+.cur-dot{width:8px;height:8px;background:var(--cyan);box-shadow:0 0 12px var(--cyan),0 0 24px var(--cyan)}
+.cur-ring{width:38px;height:38px;border:2px solid var(--purple);box-shadow:0 0 14px rgba(181,23,255,.5);transition:width .25s,height .25s,border-color .25s,background .25s}
+.cur-ring.big{width:68px;height:68px;border-color:var(--cyan);background:rgba(0,243,255,.06)}
+@media (pointer:fine){.cur-dot,.cur-ring{display:block}}
 
-        .loader-ring-outer {
-            position: absolute;
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            border: 4px solid transparent;
-            border-top-color: var(--neon-cyan);
-            border-bottom-color: var(--neon-purple);
-            animation: spin-fast 1.5s linear infinite;
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
-        }
+/* ---------- nav ---------- */
+header.top{position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:calc(10px + env(safe-area-inset-top)) var(--gutter) 10px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(5,1,15,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);transition:transform .35s}
+header.top.hide{transform:translateY(-100%)}
+.logo{font-family:'Orbitron';font-weight:900;font-size:20px;letter-spacing:3px;color:#fff;text-shadow:0 0 12px var(--cyan),0 0 26px var(--cyan)}
+.logo b{color:var(--purple);text-shadow:0 0 12px var(--purple),0 0 26px var(--purple)}
+nav.desk{display:none;gap:30px;font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase}
+nav.desk a{color:var(--muted);transition:.2s;position:relative}
+nav.desk a:hover,nav.desk a.on{color:var(--cyan);text-shadow:0 0 12px var(--cyan)}
+.hire{display:none;padding:10px 20px;border:1px solid var(--cyan);border-radius:10px;color:var(--cyan);font-family:'Orbitron';font-size:11px;font-weight:700;letter-spacing:2px;transition:.3s}
+.hire:hover{background:var(--cyan);color:#000;box-shadow:0 0 24px var(--cyan)}
+.burger{width:42px;height:42px;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;background:var(--glass)}
+.burger span,.burger span::before,.burger span::after{display:block;width:18px;height:2px;background:var(--cyan);border-radius:2px;position:relative;transition:.3s;box-shadow:0 0 8px var(--cyan)}
+.burger span::before,.burger span::after{content:'';position:absolute;left:0}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.burger.open span{background:transparent;box-shadow:none}
+.burger.open span::before{top:0;transform:rotate(45deg)}
+.burger.open span::after{top:0;transform:rotate(-45deg)}
+@media(min-width:900px){nav.desk,.hire{display:flex}.burger{display:none}}
 
-        .loader-ring-inner {
-            position: absolute;
-            width: 80%; height: 80%;
-            border-radius: 50%;
-            border: 3px solid transparent;
-            border-left-color: var(--neon-purple);
-            border-right-color: var(--neon-cyan);
-            animation: spin-fast 1s linear infinite reverse;
-            box-shadow: inset 0 0 20px rgba(188, 19, 254, 0.3);
-        }
+/* mobile menu */
+#menu{position:fixed;inset:0;z-index:150;background:rgba(5,1,15,.96);backdrop-filter:blur(20px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  opacity:0;visibility:hidden;transition:.4s}
+#menu.open{opacity:1;visibility:visible}
+#menu a{font-family:'Orbitron';font-weight:700;font-size:clamp(24px,8vw,34px);letter-spacing:3px;padding:12px 24px;color:#fff;
+  transform:translateY(24px);opacity:0;transition:.5s}
+#menu.open a{transform:none;opacity:1}
+#menu.open a:nth-child(2){transition-delay:.06s}#menu.open a:nth-child(3){transition-delay:.12s}
+#menu.open a:nth-child(4){transition-delay:.18s}#menu.open a:nth-child(5){transition-delay:.24s}
+#menu a:active{color:var(--cyan);text-shadow:0 0 18px var(--cyan)}
 
-        .loader-content {
-            position: absolute;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+/* ---------- sections ---------- */
+section{position:relative;padding:clamp(72px,12vw,130px) var(--gutter)}
+.wrap{max-width:1180px;margin:0 auto}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--cyan);font-weight:700;margin-bottom:14px}
+.eyebrow::before{content:'';width:28px;height:2px;background:linear-gradient(90deg,var(--cyan),transparent);box-shadow:0 0 8px var(--cyan)}
+.title{font-size:clamp(28px,7.2vw,54px);font-weight:900;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+.glow-c{color:#fff;text-shadow:0 0 12px var(--cyan),0 0 32px rgba(0,243,255,.55)}
+.glow-p{color:#fff;text-shadow:0 0 12px var(--purple),0 0 32px rgba(181,23,255,.6)}
+.grad{background:linear-gradient(120deg,var(--cyan),var(--purple) 55%,var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 16px rgba(181,23,255,.35))}
+.lead{color:var(--muted);font-size:clamp(15px,3.8vw,18px);max-width:620px}
+.head{margin-bottom:clamp(34px,7vw,64px)}
 
-        .loader-role {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 14px;
-            letter-spacing: 5px;
-            color: var(--neon-cyan);
-            opacity: 0;
-            animation: fadeIn 0.5s ease forwards 0.5s;
-            text-transform: uppercase;
-        }
+/* reveal */
+.rv{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.rv.l{transform:translateX(-40px)}.rv.r{transform:translateX(40px)}.rv.z{transform:scale(.9)}
+.rv.in{opacity:1;transform:none}
 
-        .loader-name {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 22px;
-            font-weight: 900;
-            color: white;
-            text-shadow: 0 0 15px var(--neon-purple);
-            opacity: 0;
-            animation: fadeIn 0.5s ease forwards 1.2s;
-        }
+/* ---------- hero ---------- */
+#home{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-top:110px;padding-bottom:90px;overflow:hidden}
+.avatar{position:relative;width:clamp(150px,44vw,270px);aspect-ratio:1;margin-bottom:28px}
+.avatar::before{content:'';position:absolute;inset:-9px;border-radius:50%;
+  background:conic-gradient(from 0deg,transparent,var(--cyan),transparent 40%,var(--purple),var(--pink),transparent);
+  animation:spin 5s linear infinite;filter:drop-shadow(0 0 18px var(--cyan)) drop-shadow(0 0 34px var(--purple))}
+.avatar::after{content:'';position:absolute;inset:-3px;border-radius:50%;background:var(--bg)}
+.avatar img{position:relative;z-index:2;width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,.12)}
+.avatar .dot{position:absolute;z-index:3;width:14px;height:14px;border-radius:50%;background:var(--cyan);box-shadow:0 0 14px var(--cyan),0 0 28px var(--cyan);animation:orbit 6s linear infinite;top:50%;left:50%;margin:-7px}
+.avatar .dot.d2{background:var(--pink);box-shadow:0 0 14px var(--pink),0 0 28px var(--pink);animation-duration:9s;animation-direction:reverse;width:10px;height:10px;margin:-5px}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid rgba(0,243,255,.3);border-radius:99px;background:rgba(0,243,255,.06);font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--cyan);margin-bottom:22px}
+.badge i.live{width:8px;height:8px;border-radius:50%;background:#2dff8a;box-shadow:0 0 10px #2dff8a;animation:pulse 1.6s infinite}
+h1.name{font-size:clamp(34px,10.4vw,96px);font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
+h1.name span{display:block}
+h1.name .l2{background:linear-gradient(120deg,var(--cyan),var(--purple),var(--pink),var(--cyan));background-size:250% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite;filter:drop-shadow(0 0 18px rgba(181,23,255,.5))}
+.role{font-family:'Orbitron';font-size:clamp(15px,4.4vw,28px);font-weight:500;color:#dfe6ff;min-height:1.6em;margin-bottom:10px}
+.role .t{color:var(--cyan);text-shadow:0 0 10px var(--cyan)}
+.role .caret{display:inline-block;width:3px;height:1em;background:var(--cyan);margin-left:4px;vertical-align:-3px;animation:blink .8s steps(1) infinite;box-shadow:0 0 8px var(--cyan)}
+.loc{color:var(--muted);font-size:14px;margin-bottom:22px}
+.loc i{color:var(--purple);margin-right:6px}
+.hero-p{max-width:620px;color:var(--muted);font-size:clamp(15px,4vw,19px);margin-bottom:34px}
+.hero-p b{color:#fff;font-weight:500}
+.cta{display:flex;flex-direction:column;gap:14px;width:100%;max-width:420px}
+@media(min-width:560px){.cta{flex-direction:row;justify-content:center;max-width:none}}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 30px;border-radius:14px;
+  font-family:'Orbitron';font-weight:700;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;overflow:hidden;transition:.3s;min-height:52px}
+.btn.p{background:linear-gradient(120deg,var(--cyan),var(--purple));color:#06020f;box-shadow:0 0 26px rgba(0,243,255,.35),0 0 50px rgba(181,23,255,.25)}
+.btn.p::after{content:'';position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:sweep 3.2s infinite}
+.btn.g{border:1px solid rgba(0,243,255,.5);color:var(--cyan);background:rgba(0,243,255,.05)}
+.btn:hover{transform:translateY(-3px)}
+.btn.g:hover{background:var(--cyan);color:#000;box-shadow:0 0 28px var(--cyan)}
+.btn:active{transform:scale(.97)}
+.scroll-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);width:26px;height:42px;border:2px solid rgba(255,255,255,.25);border-radius:14px}
+.scroll-hint::after{content:'';position:absolute;top:7px;left:50%;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:wheel 1.8s infinite}
+.float-ic{position:absolute;display:none;width:54px;height:54px;border-radius:16px;place-items:center;font-size:22px;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(8px);animation:bob 6s ease-in-out infinite}
+@media(min-width:900px){.float-ic{display:grid}}
 
-        .loader-terminal {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-            letter-spacing: 2px;
-            height: 20px;
-            text-shadow: 0 0 5px var(--neon-cyan);
-        }
+/* ---------- marquee ---------- */
+.marquee{padding:20px 0;border-block:1px solid var(--line);background:rgba(255,255,255,.02);overflow:hidden;position:relative}
+.marquee::before,.marquee::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2}
+.marquee::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+.marquee::after{right:0;background:linear-gradient(-90deg,var(--bg),transparent)}
+.track{display:flex;gap:44px;width:max-content;animation:scrollx 28s linear infinite}
+.track span{font-family:'Orbitron';font-weight:700;font-size:clamp(13px,3.6vw,18px);letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:44px;white-space:nowrap}
+.track span::after{content:'✦';color:var(--purple);text-shadow:0 0 10px var(--purple)}
 
-        /* --- Background Animacija --- */
-        .bg-orbs {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -1; overflow: hidden;
-            background: radial-gradient(circle at center, #0a001a 0%, #030014 100%);
-        }
-        .orb {
-            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.5;
-            animation: float 25s infinite ease-in-out alternate;
-        }
-        .orb-1 { width: 500px; height: 500px; background: var(--neon-purple); top: -15%; left: -10%; }
-        .orb-2 { width: 400px; height: 400px; background: var(--neon-cyan); bottom: -10%; right: -5%; animation-delay: -5s; }
+/* ---------- stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(min-width:760px){.stats{grid-template-columns:repeat(4,1fr);gap:20px}}
+.stat{padding:24px 16px;text-align:center;border-radius:20px;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(10px)}
+.stat b{display:block;font-family:'Orbitron';font-weight:900;font-size:clamp(30px,8vw,48px);background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 12px rgba(0,243,255,.35))}
+.stat small{color:var(--muted);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
 
-        /* Glow Tekst */
-        .text-glow-cyan {
-            text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan), 0 0 40px rgba(0, 243, 255, 0.6);
-            color: #fff;
-        }
-        .text-glow-purple {
-            text-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-purple), 0 0 40px rgba(188, 19, 254, 0.6);
-            color: #fff;
-        }
+/* ---------- cards ---------- */
+.cards{display:grid;gap:18px;grid-template-columns:1fr}
+@media(min-width:700px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.cards.c3{grid-template-columns:repeat(3,1fr)}}
+.card{position:relative;padding:28px 24px;border-radius:24px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015));
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);overflow:hidden;transition:border-color .3s,box-shadow .3s,transform .2s;transform-style:preserve-3d}
+.card::before{content:'';position:absolute;inset:0;background:radial-gradient(380px circle at var(--mx,50%) var(--my,0%),rgba(0,243,255,.16),transparent 45%);opacity:0;transition:opacity .3s;pointer-events:none}
+.card:hover::before,.card.touch::before{opacity:1}
+.card:hover,.card.touch{border-color:rgba(0,243,255,.45);box-shadow:0 18px 50px rgba(0,243,255,.12),0 0 30px rgba(181,23,255,.15)}
+.ic{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-size:24px;margin-bottom:20px;border:1px solid;position:relative}
+.ic.c{color:var(--cyan);border-color:rgba(0,243,255,.4);background:rgba(0,243,255,.08);box-shadow:0 0 22px rgba(0,243,255,.25)}
+.ic.p{color:#d77bff;border-color:rgba(181,23,255,.45);background:rgba(181,23,255,.1);box-shadow:0 0 22px rgba(181,23,255,.3)}
+.ic.k{color:var(--pink);border-color:rgba(255,43,214,.45);background:rgba(255,43,214,.09);box-shadow:0 0 22px rgba(255,43,214,.28)}
+.ic.y{color:#ffd24a;border-color:rgba(255,210,74,.4);background:rgba(255,210,74,.08);box-shadow:0 0 22px rgba(255,210,74,.22)}
+.ic.g{color:#2dff8a;border-color:rgba(45,255,138,.4);background:rgba(45,255,138,.08);box-shadow:0 0 22px rgba(45,255,138,.22)}
+.card h3{font-size:clamp(16px,4.4vw,20px);font-weight:700;margin-bottom:10px;color:#fff;letter-spacing:.5px}
+.card p{color:var(--muted);font-size:15px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tags span{padding:5px 12px;font-size:11px;font-weight:700;letter-spacing:.06em;border-radius:99px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#c9d3ee}
 
-        /* --- Masivna Profilna Slika --- */
-        .profile-img-container {
-            position: relative;
-            width: 150px; height: 150px; 
-            margin: 0 auto 1.5rem auto;
-            border-radius: 50%;
-            z-index: 10;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        @media (min-width: 480px) {
-            .profile-img-container { width: 200px; height: 200px; margin-bottom: 2rem; }
-        }
-        @media (min-width: 768px) {
-            .profile-img-container { width: 280px; height: 280px; margin-bottom: 3rem; }
-        }
-        
-        .profile-img-container::before {
-            content: '';
-            position: absolute;
-            inset: -8px;
-            border-radius: 50%;
-            background: conic-gradient(from 0deg, transparent 0%, var(--neon-cyan) 25%, transparent 50%, var(--neon-purple) 75%, transparent 100%);
-            z-index: -1;
-            animation: spin 5s linear infinite;
-            filter: drop-shadow(0 0 20px var(--neon-cyan)) drop-shadow(0 0 40px var(--neon-purple));
-        }
-        .profile-img-container::after {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 50%;
-            background: var(--bg-color);
-            z-index: -1;
-        }
-        .profile-img {
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            z-index: 2;
-            transition: transform 0.5s ease;
-        }
-        .profile-img-container:hover .profile-img {
-            transform: scale(1.05);
-        }
+/* ---------- skills ---------- */
+.skills{display:grid;gap:18px;grid-template-columns:1fr}
+@media(min-width:800px){.skills{grid-template-columns:1fr 1fr;column-gap:50px}}
+.sk .row{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px;margin-bottom:8px;letter-spacing:.04em}
+.sk .row i{margin-right:8px}
+.sk .row em{font-style:normal;color:var(--cyan);font-family:'Orbitron';font-size:12px}
+.bar{height:8px;border-radius:8px;background:rgba(255,255,255,.07);overflow:hidden}
+.bar span{display:block;height:100%;width:0;border-radius:8px;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));box-shadow:0 0 14px rgba(0,243,255,.6);transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
 
-        /* 3D Glassmorphism Kartice */
-        .tilt-card {
-            background: rgba(10, 10, 20, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            backdrop-filter: blur(15px);
-            transform-style: preserve-3d;
-            transition: transform 0.1s, box-shadow 0.3s, border-color 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        .tilt-card::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
-            transform: skewX(-20deg);
-            transition: 0.7s;
-            z-index: 1;
-            pointer-events: none;
-        }
-        .tilt-card:hover::after { left: 150%; }
-        .tilt-card:hover {
-            box-shadow: 0 20px 50px rgba(0, 243, 255, 0.15), 0 0 30px rgba(188, 19, 254, 0.15);
-            border-color: rgba(0, 243, 255, 0.4);
-        }
-        .card-content { transform: translateZ(60px); z-index: 2; position: relative; }
+/* ---------- project ---------- */
+.proj{display:flex;flex-direction:column;border-radius:28px;overflow:hidden;border:1px solid var(--line);background:rgba(10,5,25,.6);backdrop-filter:blur(14px);box-shadow:0 0 50px rgba(181,23,255,.18)}
+@media(min-width:960px){.proj{flex-direction:row}}
+.proj .media{position:relative;aspect-ratio:16/11;background:#000;overflow:hidden}
+@media(min-width:960px){.proj .media{flex:1.35;aspect-ratio:auto;min-height:520px}}
+.proj video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.proj:hover video{transform:scale(1.05)}
+.proj .media::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(5,1,15,.9),transparent 55%),linear-gradient(135deg,rgba(181,23,255,.25),transparent 50%,rgba(0,243,255,.2));pointer-events:none}
+.proj .live-tag{position:absolute;z-index:3;top:16px;left:16px;padding:6px 14px;border-radius:99px;background:rgba(0,0,0,.6);border:1px solid rgba(45,255,138,.5);font-size:11px;font-weight:700;letter-spacing:.14em;color:#2dff8a;display:flex;align-items:center;gap:8px;backdrop-filter:blur(8px)}
+.proj .live-tag i{width:7px;height:7px;border-radius:50%;background:#2dff8a;box-shadow:0 0 8px #2dff8a;animation:pulse 1.5s infinite}
+.proj .info{flex:1;padding:28px 22px 32px;display:flex;flex-direction:column;justify-content:center;gap:18px}
+@media(min-width:960px){.proj .info{padding:48px}}
+.proj h3{font-size:clamp(24px,6.6vw,42px);font-weight:900;text-transform:uppercase;letter-spacing:1px}
+.proj p{color:var(--muted);font-size:clamp(15px,3.8vw,17px)}
+.feat{display:grid;gap:8px;font-size:14px;color:#cfd8f0}
+.feat li{list-style:none;display:flex;gap:10px;align-items:flex-start}
+.feat li i{color:var(--cyan);margin-top:5px;font-size:12px;text-shadow:0 0 8px var(--cyan)}
 
-        /* Neonsko Dugme */
-        .neon-btn {
-            position: relative; display: inline-flex; align-items: center; justify-content: center;
-            padding: 16px 36px; color: var(--neon-cyan);
-            text-transform: uppercase; letter-spacing: 3px;
-            font-family: 'Orbitron'; font-weight: bold; font-size: 14px;
-            text-decoration: none; overflow: hidden; transition: 0.3s;
-            border: 1px solid var(--neon-cyan); border-radius: 8px;
-            background: rgba(0, 243, 255, 0.05);
-            box-shadow: 0 0 15px transparent inset;
-            z-index: 2;
-            cursor: pointer;
-        }
-        .neon-btn:hover {
-            color: var(--bg-color); background: var(--neon-cyan);
-            box-shadow: 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-cyan), 0 0 60px var(--neon-cyan);
-            transform: translateY(-2px);
-        }
+/* ---------- process ---------- */
+.steps{position:relative;display:grid;gap:18px;padding-left:34px}
+.steps::before{content:'';position:absolute;left:13px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--cyan),var(--purple),var(--pink));box-shadow:0 0 12px var(--purple);border-radius:2px}
+.step{position:relative;padding:22px;border-radius:20px;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(10px)}
+.step::before{content:attr(data-n);position:absolute;left:-34px;top:20px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-family:'Orbitron';font-weight:900;font-size:11px;color:#000;background:var(--cyan);box-shadow:0 0 16px var(--cyan)}
+.step h3{font-size:16px;margin-bottom:6px;color:#fff}
+.step p{color:var(--muted);font-size:14.5px}
+@media(min-width:900px){
+  .steps{grid-template-columns:repeat(4,1fr);padding:34px 0 0}
+  .steps::before{left:0;right:0;top:12px;bottom:auto;width:auto;height:2px}
+  .step::before{left:20px;top:-34px}
+}
 
-        /* Napredne Scroll Animacije */
-        .reveal-up { opacity: 0; transform: translateY(60px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
-        .reveal-left { opacity: 0; transform: translateX(-60px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
-        .reveal-right { opacity: 0; transform: translateX(60px); transition: all 1s cubic-bezier(0.5, 0, 0, 1); }
-        
-        .reveal-up.active, .reveal-left.active, .reveal-right.active {
-            opacity: 1; transform: translate(0);
-        }
+/* ---------- offer ---------- */
+.offer{padding:30px 22px;border-radius:28px;border:1px solid rgba(181,23,255,.4);background:linear-gradient(150deg,rgba(181,23,255,.14),rgba(0,243,255,.06));position:relative;overflow:hidden;box-shadow:0 0 50px rgba(181,23,255,.2)}
+.offer::before{content:'';position:absolute;width:300px;height:300px;right:-100px;top:-100px;background:var(--cyan);filter:blur(100px);opacity:.15;border-radius:50%}
+.offer ul{display:grid;gap:12px;margin:22px 0 28px;position:relative}
+@media(min-width:700px){.offer ul{grid-template-columns:1fr 1fr}.offer{padding:48px}}
+.offer li{list-style:none;display:flex;gap:12px;align-items:center;font-weight:500;font-size:15px}
+.offer li i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:11px;color:#000;background:#2dff8a;box-shadow:0 0 12px #2dff8a;flex:none}
 
-        /* Keyframes */
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes spin-fast { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(5vw, 5vh) scale(1.1); } 100% { transform: translate(-5vw, 10vh) scale(0.9); } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        @keyframes type { from { width: 0; } to { width: 100%; } }
-        @keyframes blink { 50% { border-color: transparent; } }
+/* ---------- contact ---------- */
+.contact{text-align:center}
+.contact .title{font-size:clamp(28px,8vw,64px)}
+.clinks{display:grid;gap:14px;max-width:560px;margin:34px auto 0}
+.cl{display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:18px;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(10px);text-align:left;transition:.3s;min-height:72px}
+.cl:hover,.cl:active{transform:translateY(-3px)}
+.cl .bub{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:20px;flex:none}
+.cl small{display:block;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.cl b{font-size:clamp(13px,3.9vw,17px);color:#fff;word-break:break-all}
+.cl.ph:hover{border-color:var(--cyan);box-shadow:0 0 28px rgba(0,243,255,.25)}.cl.ph .bub{background:rgba(0,243,255,.12);color:var(--cyan)}
+.cl.em:hover{border-color:var(--purple);box-shadow:0 0 28px rgba(181,23,255,.3)}.cl.em .bub{background:rgba(181,23,255,.14);color:#d77bff}
+.cl.ig:hover{border-color:var(--pink);box-shadow:0 0 28px rgba(255,43,214,.3)}.cl.ig .bub{background:rgba(255,43,214,.12);color:var(--pink)}
 
-        .typing-container {
-            display: inline-block; 
-            overflow: hidden; 
-            white-space: nowrap;
-            border-right: 4px solid var(--neon-cyan);
-            animation: type 3.5s steps(40, end), blink 0.8s step-end infinite;
-            padding-right: 8px;
-            margin: 0 auto;
-            max-width: 100%;
-        }
+footer{padding:34px var(--gutter) calc(110px + env(safe-area-inset-bottom));text-align:center;border-top:1px solid var(--line);background:rgba(0,0,0,.5);color:var(--muted);font-size:13px}
+footer .mk{font-family:'Orbitron';font-weight:700;letter-spacing:4px;color:var(--cyan);text-shadow:0 0 10px var(--cyan);margin-bottom:10px}
+@media(min-width:900px){footer{padding-bottom:34px}}
 
-        /* Video stilovi za apsolutnu popunjenost */
-        .video-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    </style>
+/* ---------- bottom dock (mobile) ---------- */
+.dock{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:180;
+  display:flex;gap:4px;padding:8px;border-radius:22px;background:rgba(10,5,25,.75);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.12);box-shadow:0 10px 40px rgba(0,0,0,.6),0 0 30px rgba(181,23,255,.2)}
+.dock a,.dock button{width:58px;height:50px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:17px;color:var(--muted);transition:.25s}
+.dock small{font-size:9px;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.dock a.on{color:var(--cyan);background:rgba(0,243,255,.1);text-shadow:0 0 12px var(--cyan)}
+.dock button{color:#000;background:linear-gradient(135deg,var(--cyan),var(--purple));box-shadow:0 0 18px rgba(0,243,255,.5)}
+@media(min-width:900px){.dock{display:none}}
+
+/* ---------- modal ---------- */
+#modal{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);display:flex;align-items:flex-end;justify-content:center;opacity:0;visibility:hidden;transition:.3s}
+#modal.open{opacity:1;visibility:visible}
+#modal .sheet{width:100%;max-width:520px;padding:28px 20px calc(28px + env(safe-area-inset-bottom));border-radius:28px 28px 0 0;background:#0b0420;border:1px solid rgba(0,243,255,.3);border-bottom:0;transform:translateY(100%);transition:.4s cubic-bezier(.2,.8,.2,1);box-shadow:0 -10px 60px rgba(0,243,255,.2)}
+#modal.open .sheet{transform:none}
+.sheet .grab{width:44px;height:4px;border-radius:4px;background:rgba(255,255,255,.2);margin:-10px auto 20px}
+.sheet h3{text-align:center;font-size:22px;margin-bottom:6px}
+.sheet>p{text-align:center;color:var(--muted);font-size:14px;margin-bottom:6px}
+.sheet .clinks{margin-top:20px}
+@media(min-width:700px){#modal{align-items:center}#modal .sheet{border-radius:28px;border-bottom:1px solid rgba(0,243,255,.3);transform:scale(.92)}#modal.open .sheet{transform:none}.sheet .grab{display:none}}
+#modal .x{position:absolute;top:14px;right:16px;font-size:22px;color:var(--muted)}
+
+/* ---------- keyframes ---------- */
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(8vw,6vh) scale(1.15)}100%{transform:translate(-6vw,12vh) scale(.9)}}
+@keyframes shine{to{background-position:250% center}}
+@keyframes blink{50%{opacity:0}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+@keyframes sweep{0%{left:-120%}60%,100%{left:160%}}
+@keyframes wheel{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(16px)}}
+@keyframes scrollx{to{transform:translateX(-50%)}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-18px) rotate(6deg)}}
+@keyframes orbit{from{transform:rotate(0) translateX(calc(clamp(150px,44vw,270px)/2 + 18px)) rotate(0)}to{transform:rotate(360deg) translateX(calc(clamp(150px,44vw,270px)/2 + 18px)) rotate(-360deg)}}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
 </head>
-<body class="antialiased selection:bg-cyan-500 selection:text-white">
+<body>
 
-    <!-- Custom Cursor -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
+<div id="progress"></div>
+<div class="cur-dot"></div><div class="cur-ring"></div>
 
-    <!-- WOW Loading Screen -->
-    <div id="loader">
-        <div class="loader-core">
-            <div class="loader-ring-outer"></div>
-            <div class="loader-ring-inner"></div>
-            <div class="loader-content">
-                <div class="loader-role">Web Developer</div>
-                <div class="loader-name">SREĆKO<br>PRODANOVIĆ</div>
-            </div>
-        </div>
-        <div class="loader-terminal" id="loader-terminal">> Inicijalizacija sistema...</div>
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-core"><i class="r1"></i><i class="r2"></i><i class="r3"></i><span class="ld-num" id="ldnum">0%</span></div>
+  <div class="ld-term" id="ldterm">> Pokretanje sistema...</div>
+  <div class="ld-bar"><span id="ldbar"></span></div>
+</div>
+
+<canvas id="net"></canvas>
+<div class="gridlines"></div>
+<div class="aurora"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+<div class="grain"></div>
+
+<!-- NAV -->
+<header class="top" id="top">
+  <a href="#home" class="logo">S<b>.</b>P</a>
+  <nav class="desk">
+    <a href="#home" data-s="home">Početna</a>
+    <a href="#expertise" data-s="expertise">Ekspertiza</a>
+    <a href="#skills" data-s="skills">Skillovi</a>
+    <a href="#projects" data-s="projects">Projekat</a>
+    <a href="#process" data-s="process">Proces</a>
+  </nav>
+  <button class="hire open-modal">Kontakt</button>
+  <button class="burger" id="burger" aria-label="Meni"><span></span></button>
+</header>
+
+<div id="menu">
+  <a href="#home">Početna</a>
+  <a href="#expertise">Ekspertiza</a>
+  <a href="#projects">Projekat</a>
+  <a href="#process">Proces</a>
+  <a href="#contact">Kontakt</a>
+</div>
+
+<!-- DOCK -->
+<nav class="dock">
+  <a href="#home" data-s="home"><i class="fa-solid fa-house"></i><small>Home</small></a>
+  <a href="#expertise" data-s="expertise"><i class="fa-solid fa-bolt"></i><small>Skills</small></a>
+  <a href="#projects" data-s="projects"><i class="fa-solid fa-rocket"></i><small>Projekat</small></a>
+  <button class="open-modal" aria-label="Kontakt"><i class="fa-solid fa-paper-plane"></i><small>Piši</small></button>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="float-ic" style="left:9%;top:26%;color:#ff7a3d"><i class="fa-brands fa-html5"></i></div>
+  <div class="float-ic" style="right:10%;top:30%;color:#3da0ff;animation-delay:-2s"><i class="fa-brands fa-css3-alt"></i></div>
+  <div class="float-ic" style="left:14%;bottom:20%;color:#ffd24a;animation-delay:-4s"><i class="fa-brands fa-js"></i></div>
+  <div class="float-ic" style="right:15%;bottom:24%;color:#2dff8a;animation-delay:-3s"><i class="fa-solid fa-mobile-screen"></i></div>
+
+  <div class="avatar rv z"><img src="sl/ja.png" alt="Srećko Prodanović"><span class="dot"></span><span class="dot d2"></span></div>
+  <div class="badge rv" style="--d:.15s"><i class="live"></i> Dostupan za nove projekte</div>
+  <h1 class="name rv" style="--d:.25s"><span class="glow-c">Srećko</span><span class="l2">Prodanović</span></h1>
+  <div class="role rv" style="--d:.35s"><span class="t" id="typed"></span><span class="caret"></span></div>
+  <p class="loc rv" style="--d:.42s"><i class="fa-solid fa-location-dot"></i>Kragujevac, Srbija</p>
+  <p class="hero-p rv" style="--d:.5s">Pravim <b>munjevito brze, vizuelno snažne sajtove</b> koji izgledaju savršeno na telefonu i koji klijente pretvaraju u kupce.</p>
+  <div class="cta rv" style="--d:.6s">
+    <a href="#projects" class="btn p"><span>Pogledaj rad</span><i class="fa-solid fa-arrow-right"></i></a>
+    <button class="btn g open-modal"><span>Kontaktiraj me</span><i class="fa-solid fa-paper-plane"></i></button>
+  </div>
+  <div class="scroll-hint"></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>HTML5</span><span>CSS3</span><span>JavaScript ES6</span><span>Responsive</span><span>Animacije</span><span>Glassmorphism</span><span>Neon UI</span><span>SEO</span><span>PWA</span><span>Performanse</span>
+    <span>HTML5</span><span>CSS3</span><span>JavaScript ES6</span><span>Responsive</span><span>Animacije</span><span>Glassmorphism</span><span>Neon UI</span><span>SEO</span><span>PWA</span><span>Performanse</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<section style="padding-block:clamp(50px,8vw,90px)">
+  <div class="wrap stats">
+    <div class="stat rv" style="--d:0s"><b data-count="100" data-suf="%">0</b><small>Mobile-first</small></div>
+    <div class="stat rv" style="--d:.1s"><b data-count="95" data-suf="+">0</b><small>Brzina skor</small></div>
+    <div class="stat rv" style="--d:.2s"><b data-count="24" data-suf="h">0</b><small>Odgovor na upit</small></div>
+    <div class="stat rv" style="--d:.3s"><b data-count="1" data-suf="god">0</b><small>Hosting + domen gratis</small></div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="eyebrow">Šta radim</span>
+      <h2 class="title glow-c">Moja ekspertiza</h2>
+      <p class="lead">Svaki sajt je dizajniran da ostavi utisak u prvih pet sekundi i da radi besprekorno na svakom ekranu.</p>
     </div>
-
-    <!-- Modal za Kontakt -->
-    <div id="contact-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300">
-        <div class="tilt-card p-6 md:p-12 w-[92%] max-w-lg relative flex flex-col gap-4 md:gap-6 transform scale-95 transition-transform duration-300 border border-cyan-500/30" id="modal-content">
-            <button id="close-modal" class="absolute top-3 right-4 md:top-4 md:right-5 text-gray-400 hover:text-cyan-400 text-3xl z-10 transition-colors">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            
-            <h3 class="text-2xl md:text-4xl font-black text-glow-cyan text-center uppercase mb-1 md:mb-2 mt-4 md:mt-0">Kontakt Mreža</h3>
-            <p class="text-gray-400 text-sm md:text-base text-center mb-4 md:mb-6 font-light">Odaberi kanal za komunikaciju</p>
-            
-            <!-- Linkovi u Modalu -->
-            <a href="tel:0612006959" class="flex items-center gap-4 md:gap-6 p-4 md:p-5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/5 hover:border-cyan-500/50 transition-all group">
-                <div class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 rounded-full bg-cyan-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <i class="fa-solid fa-phone text-lg md:text-2xl text-cyan-400"></i>
-                </div>
-                <div class="flex flex-col overflow-hidden">
-                    <span class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider mb-1">Direktna Linija</span>
-                    <span class="text-lg md:text-xl font-bold text-white tracking-widest group-hover:text-cyan-300">061 200 6959</span>
-                </div>
-            </a>
-
-            <a href="mailto:Prodanovicsrecko19@gmail.com" class="flex items-center gap-4 md:gap-6 p-4 md:p-5 rounded-xl bg-white/5 hover:bg-purple-500/20 border border-white/5 hover:border-purple-500/50 transition-all group">
-                <div class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 rounded-full bg-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <i class="fa-solid fa-envelope text-lg md:text-2xl text-purple-400"></i>
-                </div>
-                <div class="flex flex-col overflow-hidden">
-                    <span class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider mb-1">Email Terminal</span>
-                    <span class="text-sm md:text-base font-bold text-white tracking-wide group-hover:text-purple-300 truncate">Prodanovicsrecko19@gmail.com</span>
-                </div>
-            </a>
-
-            <a href="https://www.instagram.com/_srecko_2007_/" target="_blank" class="flex items-center gap-4 md:gap-6 p-4 md:p-5 rounded-xl bg-white/5 hover:bg-pink-500/20 border border-white/5 hover:border-pink-500/50 transition-all group">
-                <div class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 rounded-full bg-pink-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <i class="fa-brands fa-instagram text-2xl md:text-3xl text-pink-400"></i>
-                </div>
-                <div class="flex flex-col overflow-hidden">
-                    <span class="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider mb-1">Instagram</span>
-                    <span class="text-lg md:text-xl font-bold text-white tracking-widest group-hover:text-pink-300 truncate">@_srecko_2007_</span>
-                </div>
-            </a>
-        </div>
+    <div class="cards c3">
+      <article class="card rv l"><div class="ic c"><i class="fa-solid fa-rocket"></i></div><h3>Eksplozivne performanse</h3><p>Lagani kod bez suvišnog balasta. Stranica se učitava instant, a posetioci ostaju.</p><div class="tags"><span>Fast-load</span><span>Optimizovane slike</span><span>Lazy load</span></div></article>
+      <article class="card rv" style="--d:.12s"><div class="ic p"><i class="fa-solid fa-wand-magic-sparkles"></i></div><h3>Animacije i glow efekti</h3><p>Scroll animacije, 3D kartice, neonski sjaj, čestice i glatki prelazi koji sajtu daju život.</p><div class="tags"><span>CSS3</span><span>JS ES6</span><span>Canvas</span></div></article>
+      <article class="card rv r" style="--d:.24s"><div class="ic k"><i class="fa-solid fa-mobile-screen-button"></i></div><h3>Savršen na telefonu</h3><p>Većina saobraćaja dolazi sa mobilnog. Pravim prvo za telefon, pa tek onda za veće ekrane.</p><div class="tags"><span>Responsive</span><span>Touch UX</span><span>Mobile-first</span></div></article>
+      <article class="card rv l"><div class="ic y"><i class="fa-solid fa-crosshairs"></i></div><h3>Konverzija i UX</h3><p>Raspored, boje i pozivi na akciju osmišljeni da posetioca vode do poziva, poruke ili porudžbine.</p><div class="tags"><span>CTA</span><span>UX</span><span>Struktura</span></div></article>
+      <article class="card rv" style="--d:.12s"><div class="ic g"><i class="fa-solid fa-cart-shopping"></i></div><h3>Prodavnice i porudžbine</h3><p>Online prodavnice, forme za rezervacije i sistemi porudžbina za restorane i burger barove.</p><div class="tags"><span>Webshop</span><span>Forme</span><span>Meni</span></div></article>
+      <article class="card rv r" style="--d:.24s"><div class="ic c"><i class="fa-solid fa-gem"></i></div><h3>Premium prezentacije</h3><p>Elitni sajtovi za advokatske kancelarije, vikendice, sale za proslave i lokalne brendove.</p><div class="tags"><span>Branding</span><span>Prestiž</span><span>SEO</span></div></article>
     </div>
+  </div>
+</section>
 
-    <!-- Animirana pozadina -->
-    <div class="bg-orbs">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="eyebrow">Tech stack</span>
+      <h2 class="title glow-p">Šta znam</h2>
     </div>
+    <div class="skills">
+      <div class="sk rv"><div class="row"><span><i class="fa-brands fa-html5" style="color:#ff7a3d"></i>HTML5 / Semantika</span><em>95%</em></div><div class="bar"><span data-w="95"></span></div></div>
+      <div class="sk rv" style="--d:.08s"><div class="row"><span><i class="fa-brands fa-css3-alt" style="color:#3da0ff"></i>CSS3 / Animacije</span><em>95%</em></div><div class="bar"><span data-w="95"></span></div></div>
+      <div class="sk rv" style="--d:.16s"><div class="row"><span><i class="fa-brands fa-js" style="color:#ffd24a"></i>JavaScript ES6</span><em>88%</em></div><div class="bar"><span data-w="88"></span></div></div>
+      <div class="sk rv" style="--d:.24s"><div class="row"><span><i class="fa-solid fa-mobile-screen" style="color:#2dff8a"></i>Responsive dizajn</span><em>98%</em></div><div class="bar"><span data-w="98"></span></div></div>
+      <div class="sk rv" style="--d:.32s"><div class="row"><span><i class="fa-solid fa-palette" style="color:var(--pink)"></i>UI / Neon / Glass</span><em>92%</em></div><div class="bar"><span data-w="92"></span></div></div>
+      <div class="sk rv" style="--d:.40s"><div class="row"><span><i class="fa-brands fa-github" style="color:#fff"></i>GitHub / Hosting</span><em>85%</em></div><div class="bar"><span data-w="85"></span></div></div>
+    </div>
+  </div>
+</section>
 
-    <!-- Navigacija -->
-    <nav class="fixed top-0 w-full px-4 py-3 md:p-6 z-50 flex flex-col md:flex-row justify-center md:justify-between items-center bg-black/50 backdrop-blur-md border-b border-white/5 transition-all duration-300 gap-2 md:gap-0 shadow-lg shadow-cyan-500/5">
-        <div class="sci-fi-text text-xl md:text-2xl font-bold tracking-widest text-glow-cyan w-full md:w-auto text-center md:text-left">S.P</div>
-        <div class="flex gap-4 sm:gap-6 md:gap-8 font-bold tracking-widest text-[10px] sm:text-sm md:text-base uppercase items-center justify-center flex-wrap w-full md:w-auto">
-            <a href="#home" class="text-gray-400 hover:text-cyan-400 hover:drop-shadow-[0_0_12px_rgba(0,243,255,0.9)] transition-all duration-200">POČETNA</a>
-            <a href="#services" class="text-gray-400 hover:text-purple-400 hover:drop-shadow-[0_0_12px_rgba(188,19,254,0.9)] transition-all duration-200">EKSPERTIZA</a>
-            <a href="#projects" class="text-gray-400 hover:text-cyan-400 hover:drop-shadow-[0_0_12px_rgba(0,243,255,0.9)] transition-all duration-200">PROJEKTI</a>
-            <button class="open-modal-btn text-cyan-400 hover:text-white hover:drop-shadow-[0_0_12px_rgba(0,243,255,0.9)] transition-all duration-200 font-bold">KONTAKT</button>
-        </div>
-    </nav>
+<!-- PROJECT -->
+<section id="projects">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="eyebrow">Portfolio</span>
+      <h2 class="title glow-p">Istaknuti projekat</h2>
+    </div>
+    <div class="proj rv">
+      <div class="media">
+        <span class="live-tag"><i></i>LIVE</span>
+        <video autoplay loop muted playsinline preload="metadata"><source src="0919.mp4" type="video/mp4"></video>
+      </div>
+      <div class="info">
+        <h3 class="grad">Kod Ukletog<br>Holanđanina</h3>
+        <div class="tags" style="margin:0"><span><i class="fa-brands fa-html5"></i> HTML5</span><span><i class="fa-brands fa-css3-alt"></i> CSS3</span><span><i class="fa-brands fa-js"></i> JS ES6</span></div>
+        <p>Interaktivna platforma sa bogatim vizuelnim efektima i animacijama, optimizovana za maksimalne performanse na svim uređajima.</p>
+        <ul class="feat">
+          <li><i class="fa-solid fa-circle-check"></i>Animacije i atmosferski efekti</li>
+          <li><i class="fa-solid fa-circle-check"></i>Potpuno prilagođen telefonu</li>
+          <li><i class="fa-solid fa-circle-check"></i>Brzo učitavanje</li>
+        </ul>
+        <a href="https://www.kodukletogholandjanina.com/" target="_blank" rel="noopener noreferrer" class="btn p" style="align-self:flex-start"><span>Otvori sajt</span><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Hero Sekcija (UNAPRIJEĐEN TEKST) -->
-    <header id="home" class="min-h-screen flex flex-col justify-center items-center relative px-4 text-center pt-32 overflow-hidden w-full">
-        
-        <div class="profile-img-container reveal-up" style="transition-delay: 200ms;">
-            <img src="sl/ja.png" alt="Srećko Prodanović" class="profile-img">
-        </div>
+<!-- PROCESS -->
+<section id="process">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="eyebrow">Kako radimo</span>
+      <h2 class="title glow-c">Od ideje do sajta</h2>
+    </div>
+    <div class="steps">
+      <div class="step rv" data-n="1"><h3>Razgovor</h3><p>Čujem šta ti treba, ko su ti klijenti i šta želiš da postigneš.</p></div>
+      <div class="step rv" style="--d:.1s" data-n="2"><h3>Dizajn</h3><p>Predlog izgleda sa bojama, animacijama i rasporedom po tvom brendu.</p></div>
+      <div class="step rv" style="--d:.2s" data-n="3"><h3>Izrada</h3><p>Kodiram brz, responzivan sajt i testiram ga na telefonima i računarima.</p></div>
+      <div class="step rv" style="--d:.3s" data-n="4"><h3>Lansiranje</h3><p>Postavljam sajt online na tvoj domen i ostajem ti na raspolaganju.</p></div>
+    </div>
+  </div>
+</section>
 
-        <p class="text-cyan-400 font-bold tracking-[0.4em] mb-4 sm:mb-6 uppercase reveal-up text-[10px] md:text-sm" style="transition-delay: 400ms;">
-            <i class="fa-solid fa-bolt mr-2 text-yellow-400"></i> Digitalni Inženjering
-        </p>
-        
-        <div class="w-full px-2 max-w-[100vw] reveal-up" style="transition-delay: 600ms;">
-            <h1 class="typing-container text-[6.5vw] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-2 sm:mb-4 text-glow-purple">
-                SREĆKO PRODANOVIĆ
-            </h1>
-        </div>
-        
-        <h2 class="text-[3.5vw] sm:text-xl md:text-3xl lg:text-4xl text-gray-300 font-light reveal-up mt-4 sm:mt-6 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 w-full" style="transition-delay: 800ms;">
-            <span class="text-cyan-400 font-['Orbitron'] tracking-widest">WEB DEVELOPER</span> 
-            <span class="hidden sm:block w-1.5 h-1.5 bg-purple-500 rounded-full mx-2"></span>
-            <span class="mt-2 sm:mt-0 whitespace-nowrap"><i class="fa-solid fa-location-dot text-purple-400 mr-1 sm:mr-2"></i> Kragujevac</span>
-        </h2>
-        
-        <p class="mt-6 sm:mt-8 max-w-3xl text-gray-400 text-sm sm:text-base md:text-xl reveal-up leading-relaxed px-4 font-light" style="transition-delay: 1000ms;">
-            Kreativni arhitekta digitalnih iskustava. Specijalizovan za izradu ekstremno brzih, vizuelno dominantnih web platformi koje <span class="text-white font-bold">direktno povećavaju konverziju klijenata i grade prestiž tvog brenda.</span>
-        </p>
+<!-- OFFER -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="offer rv z">
+      <span class="eyebrow">U cenu je uključeno</span>
+      <h2 class="title grad" style="font-size:clamp(24px,6vw,40px)">Sve na jednom mestu</h2>
+      <ul>
+        <li><i class="fa-solid fa-check"></i>Dizajn po tvom brendu</li>
+        <li><i class="fa-solid fa-check"></i>Prilagođen telefonu i računaru</li>
+        <li><i class="fa-solid fa-check"></i>Besplatan hosting</li>
+        <li><i class="fa-solid fa-check"></i>Domen prve godine uključen</li>
+      </ul>
+      <button class="btn p open-modal" style="position:relative"><span>Zatraži ponudu</span><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+</section>
 
-        <a href="#services" class="mt-12 sm:mt-16 text-cyan-400 text-3xl sm:text-4xl animate-bounce reveal-up cursor-pointer inline-block hover:text-purple-400 transition-colors" style="transition-delay: 1200ms;">
-            <i class="fa-solid fa-angles-down text-glow-cyan"></i>
-        </a>
-    </header>
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <span class="eyebrow rv">Kontakt</span>
+    <h2 class="title rv"><span class="glow-c">Spreman za</span><br><span class="grad">novi projekat?</span></h2>
+    <p class="lead rv" style="margin:0 auto">Javi se i napravićemo sajt zbog kog će ljudi stati i pogledati.</p>
+    <div class="clinks">
+      <a href="tel:0612006959" class="cl ph rv"><span class="bub"><i class="fa-solid fa-phone"></i></span><span><small>Pozovi</small><b>061 200 6959</b></span></a>
+      <a href="mailto:Prodanovicsrecko19@gmail.com" class="cl em rv" style="--d:.1s"><span class="bub"><i class="fa-solid fa-envelope"></i></span><span><small>Email</small><b>Prodanovicsrecko19@gmail.com</b></span></a>
+      <a href="https://www.instagram.com/_srecko_2007_/" target="_blank" rel="noopener" class="cl ig rv" style="--d:.2s"><span class="bub"><i class="fa-brands fa-instagram"></i></span><span><small>Instagram</small><b>@_srecko_2007_</b></span></a>
+    </div>
+  </div>
+</section>
 
-    <!-- Ekspertiza Sekcija (POTPUNO REKONSTRUISANA) -->
-    <section id="services" class="min-h-screen py-24 sm:py-32 px-4 sm:px-8 lg:px-16 flex flex-col justify-center relative z-10 w-full">
-        <div class="text-center mb-16 sm:mb-20 reveal-up">
-            <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-glow-cyan mb-4 uppercase tracking-wider">Moja Ekspertiza</h2>
-            <div class="h-1 w-24 sm:w-32 bg-gradient-to-r from-cyan-400 via-purple-500 to-transparent mx-auto rounded-full"></div>
-            <p class="mt-6 text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">Zašto vrhunski biznisi biraju moja rješenja za svoj digitalni rast.</p>
-        </div>
+<footer>
+  <div class="mk">SP // DEV</div>
+  <p>&copy; 2026 Srećko Prodanović. Sva prava zadržana.<br>Napravljeno u Kragujevcu.</p>
+</footer>
 
-        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            
-            <!-- Kartica 1: Fokus na brzinu (Ključno za hranu i konverziju) -->
-            <div class="tilt-card p-8 sm:p-10 flex flex-col h-full reveal-left">
-                <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6 border border-cyan-500/30">
-                    <i class="fa-solid fa-rocket text-2xl sm:text-3xl text-cyan-400"></i>
-                </div>
-                <div class="card-content">
-                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-4 font-['Orbitron']">Eksplozivne Performanse</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm sm:text-base mb-6">U digitalnom svijetu, spora učitavanja odbijaju kupce. Projektujem napredne, lagane sisteme (HTML5, JS ES6) koji garantuju instant odziv platforme i zadržavaju pažnju posjetilaca.</p>
-                    <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="px-3 py-1 text-xs font-bold bg-white/5 rounded border border-white/10 text-cyan-300">Fast-Load</span>
-                        <span class="px-3 py-1 text-xs font-bold bg-white/5 rounded border border-white/10 text-purple-300">High-ROI</span>
-                    </div>
-                </div>
-            </div>
+<!-- MODAL -->
+<div id="modal">
+  <div class="sheet" style="position:relative">
+    <button class="x" id="mclose" aria-label="Zatvori"><i class="fa-solid fa-xmark"></i></button>
+    <div class="grab"></div>
+    <h3 class="glow-c">KONTAKT</h3>
+    <p>Odaberi kako da se čujemo</p>
+    <div class="clinks">
+      <a href="tel:0612006959" class="cl ph"><span class="bub"><i class="fa-solid fa-phone"></i></span><span><small>Pozovi</small><b>061 200 6959</b></span></a>
+      <a href="mailto:Prodanovicsrecko19@gmail.com" class="cl em"><span class="bub"><i class="fa-solid fa-envelope"></i></span><span><small>Email</small><b>Prodanovicsrecko19@gmail.com</b></span></a>
+      <a href="https://www.instagram.com/_srecko_2007_/" target="_blank" rel="noopener" class="cl ig"><span class="bub"><i class="fa-brands fa-instagram"></i></span><span><small>Instagram</small><b>@_srecko_2007_</b></span></a>
+    </div>
+  </div>
+</div>
 
-            <!-- Kartica 2: Fokus na UX (Ključno za sve biznise) -->
-            <div class="tilt-card p-8 sm:p-10 flex flex-col h-full reveal-up" style="transition-delay: 200ms;">
-                <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-purple-500/10 flex items-center justify-center mb-6 border border-purple-500/30">
-                    <i class="fa-solid fa-crosshairs text-2xl sm:text-3xl text-purple-400"></i>
-                </div>
-                <div class="card-content">
-                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-4 font-['Orbitron']">Optimizacija Konverzije</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm sm:text-base">Preko 85% prometa danas dolazi sa telefona. Moji dizajni nisu samo vizuelno spektakularni, već su psihološki strukturirani tako da posjetioca neosjetno pretvore u tvog novog kupca ili klijenta.</p>
-                </div>
-            </div>
+<script>
+(function(){
+  const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+  const fine=matchMedia('(pointer:fine)').matches;
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  document.body.classList.add('lock');
 
-            <!-- Kartica 3: Fokus na ciljane niše (Premium i Hrana) -->
-            <div class="tilt-card p-8 sm:p-10 flex flex-col h-full reveal-right" style="transition-delay: 400ms;">
-                <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-pink-500/10 flex items-center justify-center mb-6 border border-pink-500/30">
-                    <i class="fa-solid fa-gem text-2xl sm:text-3xl text-pink-400"></i>
-                </div>
-                <div class="card-content">
-                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-4 font-['Orbitron']">Premium Rješenja</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm sm:text-base mb-4">
-                        Ne pravim obične sajtove, već gradim digitalni prestiž i automatizovane sisteme za biznise koji žele da dominiraju.
-                    </p>
-                    <p class="text-gray-400 leading-relaxed text-sm sm:text-base">
-                        Kreiram elitne prezentacije za <span class="text-white font-bold">advokatske kancelarije, luksuzne vikendice i sale za proslave</span>, kao i brze sisteme prodaje za moderne <span class="text-white font-bold">restorane i burger barove</span>.
-                    </p>
-                </div>
-            </div>
+  /* ---- loader ---- */
+  const msgs=['Povezivanje na server...','Učitavanje HTML5...','Renderovanje CSS3 modula...','Kompajliranje JS ES6...','Palim neonska svetla...','Sistem spreman.'];
+  const ldnum=$('#ldnum'),ldbar=$('#ldbar'),ldterm=$('#ldterm'),loader=$('#loader');
+  let p=0,done=false;
+  function finish(){
+    if(done)return;done=true;
+    ldnum.textContent='100%';ldbar.style.width='100%';ldterm.textContent='> '+msgs[5];
+    setTimeout(()=>{loader.classList.add('done');document.body.classList.remove('lock');startTyping();setTimeout(()=>loader.remove(),1200)},450);
+  }
+  const iv=setInterval(()=>{
+    p+=Math.random()*9+4;if(p>=100){clearInterval(iv);finish();return}
+    ldnum.textContent=Math.floor(p)+'%';ldbar.style.width=p+'%';
+    ldterm.textContent='> '+msgs[Math.min(4,Math.floor(p/20))];
+  },120);
+  setTimeout(finish,4500);
 
-        </div>
-    </section>
+  /* ---- typed role ---- */
+  const words=['Web Developer','Frontend Dizajner','Kreator Animacija','Mobile-first Majstor'];
+  let wi=0,ci=0,del=false,started=false;
+  const typed=$('#typed');
+  function startTyping(){if(started)return;started=true;tick()}
+  function tick(){
+    const w=words[wi];
+    typed.textContent=w.slice(0,ci);
+    if(!del&&ci<w.length){ci++;setTimeout(tick,85)}
+    else if(!del){del=true;setTimeout(tick,1600)}
+    else if(ci>0){ci--;setTimeout(tick,45)}
+    else{del=false;wi=(wi+1)%words.length;setTimeout(tick,300)}
+  }
 
-    <!-- Projekti Sekcija -->
-    <section id="projects" class="min-h-screen py-24 sm:py-32 px-4 sm:px-8 lg:px-16 flex flex-col justify-center relative z-10 w-full">
-        <div class="text-center mb-16 sm:mb-20 reveal-up">
-            <h2 class="text-4xl sm:text-5xl md:text-6xl font-black text-glow-purple mb-4 uppercase tracking-wider">Istaknuti Projekat</h2>
-            <div class="h-1 w-24 sm:w-32 bg-gradient-to-r from-purple-500 via-pink-500 to-transparent mx-auto rounded-full"></div>
-        </div>
+  /* ---- particle network ---- */
+  const cv=$('#net'),cx=cv.getContext('2d');
+  let W,H,pts=[],mouse={x:-999,y:-999},dpr=Math.min(devicePixelRatio||1,2);
+  function resize(){
+    W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0);
+    const n=Math.min(Math.floor(W*H/17000),85);
+    pts=Array.from({length:n},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.6+.6,c:Math.random()>.5?'0,243,255':'181,23,255'}));
+  }
+  resize();addEventListener('resize',resize);
+  addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY});
+  addEventListener('touchmove',e=>{const t=e.touches[0];mouse.x=t.clientX;mouse.y=t.clientY},{passive:true});
+  addEventListener('touchend',()=>{mouse.x=mouse.y=-999});
+  const LINK=W<700?105:140;
+  function frame(){
+    cx.clearRect(0,0,W,H);
+    for(const a of pts){
+      a.x+=a.vx;a.y+=a.vy;
+      if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;
+      const dx=a.x-mouse.x,dy=a.y-mouse.y,d=Math.hypot(dx,dy);
+      if(d<110){a.x+=dx/d*1.4;a.y+=dy/d*1.4}
+      cx.beginPath();cx.arc(a.x,a.y,a.r,0,6.283);cx.fillStyle=`rgba(${a.c},.85)`;cx.shadowBlur=10;cx.shadowColor=`rgb(${a.c})`;cx.fill();
+    }
+    cx.shadowBlur=0;
+    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+      const a=pts[i],b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y);
+      if(d<LINK){cx.strokeStyle=`rgba(${a.c},${(1-d/LINK)*.28})`;cx.lineWidth=.8;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke()}
+    }
+    requestAnimationFrame(frame);
+  }
+  if(!reduce)frame();
 
-        <div class="max-w-7xl mx-auto w-full">
-            <div class="tilt-card flex flex-col lg:flex-row items-stretch reveal-up shadow-[0_0_30px_rgba(188,19,254,0.15)]">
-                
-                <div class="w-full lg:w-3/5 relative min-h-[250px] sm:min-h-[350px] lg:min-h-[600px] overflow-hidden rounded-t-2xl lg:rounded-l-2xl lg:rounded-tr-none border-b lg:border-b-0 lg:border-r border-white/10 group bg-black video-container">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-purple-900/40 via-transparent to-cyan-900/40 z-30 opacity-40 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none"></div>
-                    <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-20 transition-transform duration-700 group-hover:scale-105">
-                        <source src="0919.mp4" type="video/mp4">
-                        Vaš pretraživač ne podržava HTML5 video.
-                    </video>
-                </div>
+  /* ---- cursor ---- */
+  if(fine){
+    document.body.classList.add('has-cursor');
+    const dot=$('.cur-dot'),ring=$('.cur-ring');
+    let rx=0,ry=0,mx=0,my=0;
+    addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+    (function loop(){rx+=(mx-rx)*.16;ry+=(my-ry)*.16;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+    $$('a,button,.card,.stat').forEach(el=>{
+      el.addEventListener('mouseenter',()=>ring.classList.add('big'));
+      el.addEventListener('mouseleave',()=>ring.classList.remove('big'));
+    });
+  }
 
-                <div class="w-full lg:w-2/5 p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col justify-center card-content bg-gradient-to-b from-transparent to-black/40">
-                    
-                    <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-widest text-glow-purple mb-4 sm:mb-6 uppercase">
-                        Kod Ukletog<br>Holanđanina
-                    </h3>
-                    
-                    <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-6 sm:mb-8">
-                        <span class="px-3 py-1.5 text-xs sm:text-sm font-bold bg-cyan-500/10 text-cyan-400 rounded-md border border-cyan-500/30 backdrop-blur-sm"><i class="fa-brands fa-html5 mr-1"></i> HTML5</span>
-                        <span class="px-3 py-1.5 text-xs sm:text-sm font-bold bg-purple-500/10 text-purple-400 rounded-md border border-purple-500/30 backdrop-blur-sm"><i class="fa-brands fa-css3-alt mr-1"></i> CSS3</span>
-                        <span class="px-3 py-1.5 text-xs sm:text-sm font-bold bg-yellow-500/10 text-yellow-400 rounded-md border border-yellow-500/30 backdrop-blur-sm"><i class="fa-brands fa-js mr-1"></i> JS ES6</span>
-                    </div>
-                    
-                    <p class="text-gray-300 text-sm sm:text-lg md:text-xl mb-8 sm:mb-12 leading-relaxed font-light">
-                        Kompleksna interaktivna platforma koja pomjera granice frontend dizajna. Obiluje bogatim vizuelnim efektima, animacijama i optimizovana je za maksimalne performanse.
-                    </p>
-                    
-                    <a href="https://www.kodukletogholandjanina.com/" target="_blank" rel="noopener noreferrer" class="neon-btn self-start group text-xs sm:text-sm px-6 py-3 sm:px-9 sm:py-4">
-                        <span>Pogledaj Projekat</span> 
-                        <i class="fa-solid fa-rocket ml-2 sm:ml-4 text-lg sm:text-xl group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+  /* ---- scroll: progress, header hide, active links ---- */
+  const prog=$('#progress'),top=$('#top');let lastY=0;
+  const secs=['home','expertise','skills','projects','process','contact'].map(id=>document.getElementById(id));
+  function onScroll(){
+    const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;
+    prog.style.width=(y/h*100)+'%';
+    top.classList.toggle('hide',y>lastY&&y>200&&!$('#menu').classList.contains('open'));
+    lastY=y;
+    let cur='home';
+    secs.forEach(s=>{if(s&&s.getBoundingClientRect().top<innerHeight*.45)cur=s.id});
+    $$('[data-s]').forEach(a=>a.classList.toggle('on',a.dataset.s===cur));
+  }
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
 
-    <!-- Footer Sekcija -->
-    <section class="py-24 sm:py-32 px-4 text-center reveal-up relative z-10 flex flex-col items-center justify-center min-h-[50vh] w-full">
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-4 sm:mb-6 uppercase tracking-wider font-['Orbitron']">Spreman za novi projekat?</h2>
-        <p class="text-base sm:text-xl text-gray-400 mb-8 sm:mb-10">Kontaktiraj me i hajde da napravimo nešto nevjerovatno.</p>
-        <button class="open-modal-btn neon-btn text-xs sm:text-sm px-6 py-3 sm:px-9 sm:py-4">
-            <span>POKRENI KOMUNIKACIJU</span> 
-            <i class="fa-solid fa-satellite-dish ml-2 sm:ml-4 text-lg sm:text-xl"></i>
-        </button>
-    </section>
+  /* ---- reveal + counters + bars ---- */
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.classList.add('in');
+    const c=$('[data-count]',e.target);if(c)count(c);
+    const b=$('.bar span',e.target);if(b)b.style.width=b.dataset.w+'%';
+    io.unobserve(e.target);
+  }),{threshold:.14,rootMargin:'0px 0px -6% 0px'});
+  $$('.rv').forEach(el=>io.observe(el));
+  function count(el){
+    const to=+el.dataset.count,suf=el.dataset.suf||'',t0=performance.now(),dur=1600;
+    (function s(t){const k=Math.min((t-t0)/dur,1),e=1-Math.pow(1-k,3);el.textContent=Math.round(to*e)+suf;if(k<1)requestAnimationFrame(s)})(t0);
+  }
 
-    <footer class="py-8 sm:py-10 text-center border-t border-white/10 bg-black/80 backdrop-blur-xl relative z-10 px-4 w-full">
-        <div class="flex justify-center items-center gap-4 mb-4">
-            <div class="w-8 h-[1px] bg-cyan-500/50"></div>
-            <span class="text-cyan-400 font-bold tracking-widest font-['Orbitron'] text-xs sm:text-sm">SP // DEV</span>
-            <div class="w-8 h-[1px] bg-purple-500/50"></div>
-        </div>
-        <p class="text-gray-500 text-xs sm:text-sm font-['Space_Grotesk'] tracking-wide">
-            &copy; 2026 Srećko Prodanović. Sva prava zadržana. <br>
-            <span class="text-cyan-600/70 block mt-2">Arhitektura & Dizajn realizovani u Kragujevcu.</span>
-        </p>
-    </footer>
+  /* ---- card spotlight + tilt ---- */
+  $$('.card').forEach(card=>{
+    card.addEventListener('pointermove',e=>{
+      const r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+      card.style.setProperty('--mx',x+'px');card.style.setProperty('--my',y+'px');
+      if(fine&&e.pointerType==='mouse'){
+        const rx=((y/r.height)-.5)*-9,ry=((x/r.width)-.5)*9;
+        card.style.transform=`perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+      }
+    });
+    card.addEventListener('pointerleave',()=>{card.style.transform='';card.classList.remove('touch')});
+    card.addEventListener('touchstart',()=>card.classList.add('touch'),{passive:true});
+    card.addEventListener('touchend',()=>setTimeout(()=>card.classList.remove('touch'),500));
+  });
 
-    <script>
-        const loader = document.getElementById('loader');
-        const terminal = document.getElementById('loader-terminal');
-        
-        const techStack = [
-            'Povezivanje na server...', 
-            'Učitavanje HTML5 DOM-a...', 
-            'Renderovanje CSS3 modula...', 
-            'Kompajliranje JS ES6 skripti...', 
-            'Inicijalizacija 3D WebGL engine-a...', 
-            'Učitavanje neonskih UI resursa...'
-        ];
-        
-        let step = 0;
-        
-        const terminalInterval = setInterval(() => {
-            if (step < techStack.length) {
-                terminal.innerText = `> ${techStack[step]}`;
-                step++;
-            } else {
-                clearInterval(terminalInterval);
-                terminal.innerText = "> Sistem je spreman. Dobrodošli.";
-                terminal.classList.add('text-glow-cyan');
-                terminal.style.color = '#00f3ff';
-                terminal.style.fontWeight = 'bold';
-                
-                setTimeout(() => {
-                    loader.style.transform = 'scale(1.1)';
-                    loader.style.opacity = '0';
-                    
-                    setTimeout(() => {
-                        loader.style.display = 'none';
-                        document.body.style.overflowY = 'auto'; 
-                    }, 1000);
-                }, 800);
-            }
-        }, 350); 
+  /* ---- mobile menu ---- */
+  const burger=$('#burger'),menu=$('#menu');
+  function toggleMenu(f){
+    const o=f??!menu.classList.contains('open');
+    menu.classList.toggle('open',o);burger.classList.toggle('open',o);document.body.classList.toggle('lock',o);
+  }
+  burger.addEventListener('click',()=>toggleMenu());
+  $$('#menu a').forEach(a=>a.addEventListener('click',()=>toggleMenu(false)));
 
-        document.body.style.overflowY = 'hidden';
-
-        const contactModal = document.getElementById('contact-modal');
-        const modalContent = document.getElementById('modal-content');
-        const openModalBtns = document.querySelectorAll('.open-modal-btn');
-        const closeModalBtn = document.getElementById('close-modal');
-
-        openModalBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                contactModal.classList.remove('hidden');
-                contactModal.classList.add('flex');
-                
-                setTimeout(() => {
-                    contactModal.classList.remove('opacity-0');
-                    modalContent.classList.remove('scale-95');
-                    modalContent.classList.add('scale-100');
-                }, 10);
-            });
-        });
-
-        const closeModal = () => {
-            contactModal.classList.add('opacity-0');
-            modalContent.classList.remove('scale-100');
-            modalContent.classList.add('scale-95');
-            setTimeout(() => {
-                contactModal.classList.add('hidden');
-                contactModal.classList.remove('flex');
-            }, 300);
-        };
-
-        closeModalBtn.addEventListener('click', closeModal);
-        
-        contactModal.addEventListener('click', (e) => {
-            if(e.target === contactModal) {
-                closeModal();
-            }
-        });
-
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorOutline = document.querySelector('.cursor-outline');
-        
-        if(window.matchMedia("(pointer: fine)").matches) {
-            window.addEventListener('mousemove', (e) => {
-                const posX = e.clientX;
-                const posY = e.clientY;
-
-                cursorDot.style.left = `${posX}px`;
-                cursorDot.style.top = `${posY}px`;
-
-                cursorOutline.style.left = `${posX}px`;
-                cursorOutline.style.top = `${posY}px`;
-            });
-
-            const clickables = document.querySelectorAll('a, button, .tilt-card');
-            clickables.forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    cursorOutline.style.width = '70px';
-                    cursorOutline.style.height = '70px';
-                    cursorOutline.style.borderColor = 'var(--neon-cyan)';
-                    cursorOutline.style.backgroundColor = 'rgba(0, 243, 255, 0.05)';
-                    cursorDot.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                });
-                el.addEventListener('mouseleave', () => {
-                    cursorOutline.style.width = '40px';
-                    cursorOutline.style.height = '40px';
-                    cursorOutline.style.borderColor = 'var(--neon-purple)';
-                    cursorOutline.style.backgroundColor = 'transparent';
-                    cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
-                });
-            });
-        }
-
-        const tiltCards = document.querySelectorAll('.tilt-card');
-        
-        if(window.matchMedia("(pointer: fine)").matches) {
-            tiltCards.forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left; 
-                    const y = e.clientY - rect.top;  
-                    
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    
-                    const rotateX = ((y - centerY) / centerY) * -8; 
-                    const rotateY = ((x - centerX) / centerX) * 8;
-                    
-                    card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = `perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                });
-            });
-        }
-
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15 
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right').forEach(el => {
-            observer.observe(el);
-        });
-
-    </script>
+  /* ---- modal ---- */
+  const modal=$('#modal');
+  function openM(){modal.classList.add('open');document.body.classList.add('lock')}
+  function closeM(){modal.classList.remove('open');document.body.classList.remove('lock')}
+  $$('.open-modal').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();toggleMenu(false);openM()}));
+  $('#mclose').addEventListener('click',closeM);
+  modal.addEventListener('click',e=>{if(e.target===modal)closeM()});
+  addEventListener('keydown',e=>{if(e.key==='Escape'){closeM();toggleMenu(false)}});
+})();
+</script>
 </body>
 </html>
